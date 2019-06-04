@@ -3,7 +3,7 @@
 /**
  * @SWG\Swagger(
  *     basePath="/api",
- *     host="front.wukehui.cn",
+ *     host="front.wukehui.cn/",
  *     schemes={"http"},
  *     @SWG\Info(
  *         version="1.0",

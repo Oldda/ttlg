@@ -7,7 +7,6 @@ use App\Repositories\TbkServices\BannerService;
 use App\Repositories\TbkServices\CatService;
 use App\Repositories\TbkServices\ChannelService;
 use App\Repositories\TbkServices\ProductService;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class IndexController extends Controller
