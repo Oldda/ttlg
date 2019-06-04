@@ -18,7 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 //app首页
 Route::group(['namespace'=>'ClientApi'],function (){
-    Route::get('/{limit?}/{page?}','IndexController@index');
+    Route::get('/index/{limit?}/{page?}','IndexController@index');
 });
 
 Route::get('test',function (){
