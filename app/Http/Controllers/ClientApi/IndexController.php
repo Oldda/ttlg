@@ -24,6 +24,38 @@ class IndexController extends Controller
         $this->productService = $productService;
     }
 
+    /**
+     * @SWG\Get(
+     *     path="/index/{limit}/{page}",
+     *     summary="app首页整合数据",
+     *     tags={"首页相关接口"},
+     *     description="app首页整合数据，分类，轮播，频道，产品列表",
+     *     operationId="account_index",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="limit",
+     *         in="path",
+     *         description="每页显示的条数,默认8条",
+     *         required=false,
+     *         type="integer",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="page",
+     *         in="path",
+     *         description="页码，默认为第1页",
+     *         required=false,
+     *         type="integer",
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="SUCCESS"
+     *     ),
+     *     @SWG\Response(
+     *         response=422,
+     *         description="详见错误附件",
+     *     )
+     * )
+     */
     public function index($limit=8,$page=1)
     {
         $data = array();
@@ -32,10 +64,5 @@ class IndexController extends Controller
         $data['channel'] = $this->channelService->list();//频道
         $data['productList'] = $this->productService->list($limit,$page);
         return ApiReturn::handle('SUCCESS',$data);
-    }
-
-    public function search()
-    {
-
     }
 }

@@ -1,0 +1,131 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "\u5929\u5929\u4e50\u8d2dAPP_VERSION_1.0",
+        "description": "\u9519\u8bef\u7801\u9644\u4ef61\uff1ahttp://front.wukehui.cn/api/errors",
+        "contact": {
+            "name": "ren",
+            "url": "http://"
+        },
+        "version": "1.0"
+    },
+    "host": "front.wukehui.cn",
+    "basePath": "/api",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/index/{limit}/{page}": {
+            "get": {
+                "tags": [
+                    "\u9996\u9875\u76f8\u5173\u63a5\u53e3"
+                ],
+                "summary": "app\u9996\u9875\u6574\u5408\u6570\u636e",
+                "description": "app\u9996\u9875\u6574\u5408\u6570\u636e\uff0c\u5206\u7c7b\uff0c\u8f6e\u64ad\uff0c\u9891\u9053\uff0c\u4ea7\u54c1\u5217\u8868",
+                "operationId": "account_index",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "path",
+                        "description": "\u6bcf\u9875\u663e\u793a\u7684\u6761\u6570,\u9ed8\u8ba48\u6761",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "page",
+                        "in": "path",
+                        "description": "\u9875\u7801\uff0c\u9ed8\u8ba4\u4e3a\u7b2c1\u9875",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "SUCCESS"
+                    },
+                    "422": {
+                        "description": "\u8be6\u89c1\u9519\u8bef\u9644\u4ef6"
+                    }
+                }
+            }
+        },
+        "/product/search/{keyword}/{limit}/{page}": {
+            "get": {
+                "tags": [
+                    "\u5546\u54c1\u76f8\u5173\u63a5\u53e3"
+                ],
+                "summary": "\u641c\u7d22\u4ea7\u54c1",
+                "description": "\u641c\u7d22\u4ea7\u54c1",
+                "operationId": "account_index",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "keyword",
+                        "in": "path",
+                        "description": "\u641c\u7d22\u5173\u952e\u8bcd",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "path",
+                        "description": "\u6bcf\u9875\u663e\u793a\u7684\u6761\u6570,\u9ed8\u8ba48\u6761",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "page",
+                        "in": "path",
+                        "description": "\u9875\u7801\uff0c\u9ed8\u8ba4\u4e3a\u7b2c1\u9875",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "SUCCESS"
+                    },
+                    "422": {
+                        "description": "\u8be6\u89c1\u9519\u8bef\u9644\u4ef6"
+                    }
+                }
+            }
+        },
+        "/product/{num_iid}": {
+            "get": {
+                "tags": [
+                    "\u5546\u54c1\u76f8\u5173\u63a5\u53e3"
+                ],
+                "summary": "\u5546\u54c1\u8be6\u60c5",
+                "description": "\u5546\u54c1\u8be6\u60c5",
+                "operationId": "account_index",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "num_iid",
+                        "in": "path",
+                        "description": "\u5546\u54c1id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "SUCCESS"
+                    },
+                    "422": {
+                        "description": "\u8be6\u89c1\u9519\u8bef\u9644\u4ef6"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {}
+}

@@ -26,6 +26,11 @@ return [
         'response_code' => 104,
         'msg' => '删除资源错误'
     ],
+    'PARAMETER_LOST' => [
+        'status' => false,
+        'response_code' => 105,
+        'msg' => '缺少必要参数'
+    ],
     'SUCCESS' => [
         'status' => true,
         'response_code' => 200,
