@@ -169,6 +169,10 @@ return [
          */
 
         /*
+         * Custom Service Providers...
+         */
+        App\Providers\CustomProvider::class,
+        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
