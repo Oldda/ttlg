@@ -59,7 +59,7 @@ class ProductController extends Controller
     {
         if (!empty($keyword)){
             $data = $this->productService->search($keyword,$limit,$page);
-            return ApiReturn::handle('SUCCESS',$data);
+            return ApiReturn::handle('SUCCESS',$data,$limit,$page);
         }
         return ApiReturn::handle('PARAMETER_LOST');
     }
