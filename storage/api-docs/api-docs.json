@@ -9,7 +9,7 @@
         },
         "version": "1.0"
     },
-    "host": "front.wukehui.cn/",
+    "host": "front.wukehui.cn",
     "basePath": "/api",
     "schemes": [
         "http"
@@ -120,6 +120,78 @@
                         "in": "path",
                         "description": "\u4f18\u60e0\u5238id",
                         "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "SUCCESS"
+                    },
+                    "422": {
+                        "description": "\u8be6\u89c1\u9519\u8bef\u9644\u4ef6"
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "\u7528\u6237\u76f8\u5173\u63a5\u53e3"
+                ],
+                "summary": "\u7528\u6237\u767b\u5f55",
+                "description": "\u7528\u6237\u767b\u5f55\u63a5\u53e3\uff0c\u5305\u542b\u4e09\u65b9\u6388\u6743\u767b\u5f55",
+                "operationId": "user_login",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "login_type",
+                        "in": "formData",
+                        "description": "\u6682\u652f\u63011\u7b2c\u4e09\u65b9\u6388\u6743\u767b\u5f55",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "auth_platform",
+                        "in": "formData",
+                        "description": "1\u6dd8\u5b9d\u6388\u6743",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "auth_token",
+                        "in": "formData",
+                        "description": "\u6388\u6743\u51ed\u8bc1",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nickname",
+                        "in": "formData",
+                        "description": "\u6635\u79f0-\u7b2c\u4e09\u65b9\u767b\u5f55\u4e0d\u80fd\u4e3a\u7a7a",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "thumbnail",
+                        "in": "formData",
+                        "description": "\u7528\u6237\u5934\u50cfurl-\u7b2c\u4e09\u65b9\u767b\u5f55\u4e0d\u80fd\u4e3a\u7a7a",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "phone",
+                        "in": "formData",
+                        "description": "\u7528\u6237\u624b\u673a\u53f7",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "\u5904\u7406\u7ed3\u679c\u56de\u8c03URL",
+                        "required": false,
                         "type": "string"
                     }
                 ],

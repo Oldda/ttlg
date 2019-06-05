@@ -2,8 +2,12 @@
 
 namespace App\Exceptions;
 
+use App\Facades\ApiReturn;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -48,6 +52,27 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        //接口返回格式
+        switch ($exception){
+            case $exception instanceof MethodNotAllowedHttpException:
+                return ApiReturn::handle('METHOD_NOT_ALLOWED');
+                break;
+            case $exception instanceof NotFoundHttpException:
+                return ApiReturn::handle('API_URL_NOT_FOUND');
+                break;
+        }
         return parent::render($request, $exception);
+    }
+
+    //重写表单验证失败返回格式
+    protected function invalid($request, ValidationException $exception)
+    {
+        return response()->json([
+            'status'=>false,
+            'response_code' => 302,
+            'response_time'=> date('Y-m-d H:i:s'),
+            'msg' => $exception->getMessage(),
+            'errors' => $exception->errors(),
+        ], 302); //$exception->status
     }
 }

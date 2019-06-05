@@ -31,6 +31,11 @@ return [
         'response_code' => 105,
         'msg' => '缺少必要参数'
     ],
+    'METHOD_NOT_ALLOWED' => [
+        'status' => false,
+        'response_code' => 106,
+        'msg' => '请求方式错误'
+    ],
     'SUCCESS' => [
         'status' => true,
         'response_code' => 200,
