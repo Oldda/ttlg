@@ -61,7 +61,7 @@ class IndexController extends Controller
         $data['cat'] = $this->catService->list(); //分类
         $data['banner'] = $this->bannerService->list(); //banner图
         $data['channel'] = $this->channelService->list();//频道
-        $data['productList'] = $this->productService->list($limit,$page);
+        $data['productList'] = $this->productService->search('',$limit,$page);
         return ApiReturn::handle('SUCCESS',$data);
     }
 }

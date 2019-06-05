@@ -58,23 +58,30 @@ class ProductController extends Controller
     public function search($keyword='', $limit=8, $page=1)
     {
         if (!empty($keyword)){
-            return $this->productService->search($keyword,$limit,$page);
+            $data = $this->productService->search($keyword,$limit,$page);
+            return ApiReturn::handle('SUCCESS',$data);
         }
         return ApiReturn::handle('PARAMETER_LOST');
     }
 
     /**
      * @SWG\Get(
-     *     path="/product/{num_iid}",
+     *     path="/product/show/{num_iid}",
      *     summary="商品详情",
      *     tags={"商品相关接口"},
      *     description="商品详情",
      *     operationId="account_index",
      *     produces={"application/json"},
      *     @SWG\Parameter(
-     *         name="num_iid",
+     *         name="item_id",
      *         in="path",
      *         description="商品id",
+     *         required=true,
+     *         type="string",
+     *     ),
+     *        name="coupon_id",
+     *         in="path",
+     *         description="优惠券id",
      *         required=true,
      *         type="string",
      *     ),
@@ -88,8 +95,10 @@ class ProductController extends Controller
      *     )
      * )
      */
-    public function show($num_iid)
+    public function show($item_id,$coupon_id)
     {
-        return $this->productService->show($num_iid);
+        $data = $this->productService->show($item_id);
+        $data->coupon = $this->productService->coupon($item_id,$coupon_id);
+        return ApiReturn::handle('SUCCESS',$data);
     }
 }

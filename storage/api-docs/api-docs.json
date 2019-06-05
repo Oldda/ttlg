@@ -9,7 +9,7 @@
         },
         "version": "1.0"
     },
-    "host": "front.wukehui.cn",
+    "host": "front.wukehui.cn/",
     "basePath": "/api",
     "schemes": [
         "http"

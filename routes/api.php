@@ -5,6 +5,6 @@ Route::group(['namespace'=>'ClientApi'],function (){
     /**
      * 商品路由
      */
-    Route::get('/product/search/{keyword}/{limit?}/{page?}','ProductController@search');
-    Route::get('/product/{num_iid}','ProductController@show');
+    Route::get('/product/search/{keyword}','ProductController@search');
+    Route::get('/product/show/{item_id}/{coupon_id}','ProductController@show');
 });
