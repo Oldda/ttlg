@@ -96,7 +96,7 @@
                 }
             }
         },
-        "/product/{num_iid}": {
+        "/product/show/{item_id}/{coupon_id}": {
             "get": {
                 "tags": [
                     "\u5546\u54c1\u76f8\u5173\u63a5\u53e3"
@@ -109,9 +109,16 @@
                 ],
                 "parameters": [
                     {
-                        "name": "num_iid",
+                        "name": "item_id",
                         "in": "path",
                         "description": "\u5546\u54c1id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "coupon_id",
+                        "in": "path",
+                        "description": "\u4f18\u60e0\u5238id",
                         "required": true,
                         "type": "string"
                     }

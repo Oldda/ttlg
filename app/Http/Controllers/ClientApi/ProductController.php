@@ -66,7 +66,7 @@ class ProductController extends Controller
 
     /**
      * @SWG\Get(
-     *     path="/product/show/{num_iid}",
+     *     path="/product/show/{item_id}/{coupon_id}",
      *     summary="商品详情",
      *     tags={"商品相关接口"},
      *     description="商品详情",
@@ -79,6 +79,7 @@ class ProductController extends Controller
      *         required=true,
      *         type="string",
      *     ),
+     *     @SWG\Parameter(
      *        name="coupon_id",
      *         in="path",
      *         description="优惠券id",
