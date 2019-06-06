@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\ClientApi;
 
+use App\Facades\ApiReturn;
+use App\Http\Requests\FeedbackPost;
 use App\Models\Feedback;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -10,6 +12,7 @@ class FeedbackController extends Controller
 {
     public function __construct()
     {
+        parent::__construct();
     }
 
     /**
@@ -21,7 +24,7 @@ class FeedbackController extends Controller
      *     operationId="feedback_store",
      *     produces={"application/json"},
      *     @SWG\Parameter(
-     *         name="login_token",
+     *         name="login-token",
      *         in="header",
      *         description="登录token",
      *         required=true,
@@ -44,8 +47,15 @@ class FeedbackController extends Controller
      *     )
      * )
      */
-    public function store(Request $request)
+    public function store(FeedbackPost $request)
     {
-
+        $add = Feedback::create([
+            'user_id' => $this->user_id,
+            'content' => $request->content
+        ]);
+        if (!$add){
+            return ApiReturn::handle('ADD_SOURCE_ERROR');
+        }
+        return ApiReturn::handle('SUCCESS',$add);
     }
 }

@@ -14,6 +14,6 @@ Route::group(['namespace'=>'ClientApi'],function (){
     Route::post('/login','UserController@login');
 });
 //登录中间件路由
-Route::group(['namespace'=>'ClientApi'],function (){
+Route::group(['namespace'=>'ClientApi','middleware'=>'login'],function (){
     Route::post('feedback','FeedbackController@store');
 });

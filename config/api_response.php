@@ -36,6 +36,16 @@ return [
         'response_code' => 106,
         'msg' => '请求方式错误'
     ],
+    'TOKEN_LOST' => [
+        'status' => false,
+        'response_code' => 107,
+        'msg' => 'token丢失'
+    ],
+    'TOKEN_ERROR' => [
+        'status' => false,
+        'response_code' => 108,
+        'msg' => 'token错误'
+    ],
     'SUCCESS' => [
         'status' => true,
         'response_code' => 200,
