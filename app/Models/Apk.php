@@ -10,9 +10,10 @@ class Apk extends Model
 
     const CREATED_AT = 'create_time';
 
-    const UPDATED_AT = 'update_time';
-
     protected $guarded = [
-        'create_time','update_time'
+        'create_time'
+    ];
+    protected $hidden = [
+        'id','create_time'
     ];
 }
