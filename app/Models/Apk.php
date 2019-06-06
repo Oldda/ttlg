@@ -16,4 +16,15 @@ class Apk extends Model
     protected $hidden = [
         'id','create_time','update_time'
     ];
+
+    /**
+     * 访问器-下载路径拼接
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getDownloadurlAttribute($value)
+    {
+        return request()->server('SERVER_NAME').$value;
+    }
 }
