@@ -25,6 +25,6 @@ class Apk extends Model
      */
     public function getDownloadurlAttribute($value)
     {
-        return request()->server('SERVER_NAME').$value;
+        return 'http://pub.wukehui.cn'.$value;
     }
 }
