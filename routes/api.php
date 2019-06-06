@@ -12,6 +12,7 @@ Route::group(['namespace'=>'ClientApi'],function (){
      */
     Route::resource('/user','UserController');
     Route::post('/login','UserController@login');
+    Route::get('/apk','ApkController@getApk');
 });
 //登录中间件路由
 Route::group(['namespace'=>'ClientApi','middleware'=>'login'],function (){

@@ -46,6 +46,11 @@ return [
         'response_code' => 108,
         'msg' => 'token错误'
     ],
+    'PARAMETER_ERROR' => [
+        'status' => false,
+        'response_code' => 109,
+        'msg' => '参数错误'
+    ],
     'SUCCESS' => [
         'status' => true,
         'response_code' => 200,
