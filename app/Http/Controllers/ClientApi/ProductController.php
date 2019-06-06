@@ -76,7 +76,7 @@ class ProductController extends Controller
 
     /**
      * @SWG\Get(
-     *     path="/product/show/{item_id}/{coupon_id}",
+     *     path="/product/show",
      *     summary="商品详情",
      *     tags={"商品相关接口"},
      *     description="商品详情",
@@ -106,8 +106,13 @@ class ProductController extends Controller
      *     )
      * )
      */
-    public function show($item_id,$coupon_id)
+    public function show()
     {
+        $item_id = request('item_id','');
+        $coupon_id = request('coupon_id','');
+        if (empty($item_id) || empty($coupon_id)){
+            return ApiReturn::handle('PARAMETER_LOST');
+        }
         $data = $this->productService->show($item_id);
         $data->coupon = $this->productService->coupon($item_id,$coupon_id);
         return ApiReturn::handle('SUCCESS',$data);

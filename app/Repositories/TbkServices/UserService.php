@@ -3,6 +3,7 @@ namespace App\Repositories\TbkServices;
 
 use App\Facades\ApiReturn;
 use App\Models\LoginInfo;
+use App\Models\LoginLog;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -10,6 +11,7 @@ class UserService
 {
     public function login($request)
     {
+        $user = null;
         switch ($request->login_type){
             case 1://第三方授权登录
                 $user = (new User())->whereHas('loginInfos',function($query)use($request){
@@ -27,16 +29,18 @@ class UserService
                         'auth_platform' => $request->auth_platform,
                         'auth_token' => $request->auth_token
                     ]);
-                }else{//用户存在
-                    return ApiReturn::handle('SUCCESS',$user);
                 }
                 break;
-            case 2://手机号直接登录
+            case 2:
                 break;
             default:
                 return false;
                 break;
         }
+        //初始化登录token
+        $user->login_token = $this->generateToken($request,$user->id);
+        //返回user
+        return ApiReturn::handle('SUCCESS',$user);
     }
 
     //添加用户
@@ -54,5 +58,21 @@ class UserService
             DB::rollBack();
             return ApiReturn::handle('ADD_SOURCE_ERROR');
         }
+    }
+    
+    //登录日志
+    public function generateToken($request,$user_id)
+    {
+        $data = array(
+            'client' => $request->header('client')??1,
+            'clientinfo' => $request->header('client_info')??'',
+            'location' => $request->header('location')??'',
+            'expire_at' => time() + 60 * 60,//1小时失效
+            'user_id' => $user_id,
+            'other' => $request->header('other')??''
+        );
+        $data['token'] = encrypt(json_encode($data));
+        LoginLog::create($data);
+        return $data['token'];
     }
 }

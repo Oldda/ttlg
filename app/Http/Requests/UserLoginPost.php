@@ -26,7 +26,7 @@ class UserLoginPost extends FormRequest
         return [
             'login_type' => 'required|numeric',
             'auth_platform' => 'required|numeric',
-            'auth_token' => 'required|string'
+            'auth_token' => 'required|string',
         ];
     }
 }

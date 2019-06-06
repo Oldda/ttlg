@@ -15,7 +15,7 @@
         "http"
     ],
     "paths": {
-        "/index/{limit}/{page}": {
+        "/index": {
             "get": {
                 "tags": [
                     "\u9996\u9875\u76f8\u5173\u63a5\u53e3"
@@ -52,7 +52,7 @@
                 }
             }
         },
-        "/product/search/{keyword}/{limit}/{page}": {
+        "/product/search": {
             "get": {
                 "tags": [
                     "\u5546\u54c1\u76f8\u5173\u63a5\u53e3"
@@ -68,7 +68,14 @@
                         "name": "keyword",
                         "in": "path",
                         "description": "\u641c\u7d22\u5173\u952e\u8bcd",
-                        "required": true,
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "cat",
+                        "in": "path",
+                        "description": "\u7c7b\u76ee\u7684id,\u591a\u4e2a\u7528','\u5206\u5272",
+                        "required": false,
                         "type": "string"
                     },
                     {

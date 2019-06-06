@@ -46,6 +46,34 @@ class UserController extends Controller
      *     operationId="user_login",
      *     produces={"application/json"},
      *     @SWG\Parameter(
+     *         name="client",
+     *         in="header",
+     *         description="登录终端1安卓",
+     *         required=false,
+     *         type="integer",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="clientinfo",
+     *         in="header",
+     *         description="终端信息",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="location",
+     *         in="header",
+     *         description="登录地点",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="other",
+     *         in="header",
+     *         description="其他信息",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
      *         name="login_type",
      *         in="formData",
      *         description="暂支持1第三方授权登录",
@@ -90,7 +118,7 @@ class UserController extends Controller
      *     @SWG\Parameter(
      *         name="email",
      *         in="formData",
-     *         description="处理结果回调URL",
+     *         description="邮箱地址",
      *         required=false,
      *         type="string",
      *     ),

@@ -16,6 +16,10 @@ class User extends Model
         'create_time','update_time'
     ];
 
+    protected $hidden = [
+        'id','create_time','update_time'
+    ];
+
     /**
      * 修改器-昵称
      *
@@ -41,5 +45,15 @@ class User extends Model
     public function loginInfos()
     {
         return $this->hasMany('App\Models\LoginInfo','user_id');
+    }
+    //和反馈信息的关联关系
+    public function feedbacks()
+    {
+        return $this->hasMany('App\Models\Feedback','user_id');
+    }
+    //和登录日志的关联关系
+    public function loginLogs()
+    {
+        return $this->hasMany('App\Models\LoginLog','user_id');
     }
 }

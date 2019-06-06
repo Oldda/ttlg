@@ -6,10 +6,14 @@ Route::group(['namespace'=>'ClientApi'],function (){
      * 商品路由
      */
     Route::get('/product/search','ProductController@search');
-    Route::get('/product/show/{item_id}/{coupon_id}','ProductController@show');
+    Route::get('/product/show','ProductController@show');
     /**
      * 用户路由
      */
     Route::resource('/user','UserController');
     Route::post('/login','UserController@login');
+});
+//登录中间件路由
+Route::group(['namespace'=>'ClientApi'],function (){
+    Route::post('feedback','FeedbackController@store');
 });
