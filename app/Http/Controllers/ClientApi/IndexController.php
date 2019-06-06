@@ -15,6 +15,8 @@ class IndexController extends Controller
     private $catService;
     private $channelService;
     private $productService;
+    private $limit = 8;
+    private $page = 1;
     public function __construct(CatService $catService, BannerService $bannerService, ChannelService $channelService, ProductService $productService)
     {
         $this->catService = $catService;
@@ -25,7 +27,7 @@ class IndexController extends Controller
 
     /**
      * @SWG\Get(
-     *     path="/index/{limit}/{page}",
+     *     path="/index",
      *     summary="app首页整合数据",
      *     tags={"首页相关接口"},
      *     description="app首页整合数据，分类，轮播，频道，产品列表",
@@ -55,13 +57,15 @@ class IndexController extends Controller
      *     )
      * )
      */
-    public function index($limit=8,$page=1)
+    public function index()
     {
+        $limit = request('limit',$this->limit);
+        $page = request('page',$this->page);
         $data = array();
         $data['cat'] = $this->catService->list(); //分类
         $data['banner'] = $this->bannerService->list(); //banner图
         $data['channel'] = $this->channelService->list();//频道
-        $data['productList'] = $this->productService->search('',$limit,$page);
+        $data['productList'] = $this->productService->search('','',$limit,$page);
         return ApiReturn::handle('SUCCESS',$data,$limit,$page);
     }
 }

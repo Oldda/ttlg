@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 class ProductController extends Controller
 {
     private $productService;
+    private $limit = 8;
+    private $page = 1;
 
     public function __construct(ProductService $productService)
     {
@@ -18,7 +20,7 @@ class ProductController extends Controller
 
     /**
      * @SWG\Get(
-     *     path="/product/search/{keyword}/{limit}/{page}",
+     *     path="/product/search",
      *     summary="搜索产品",
      *     tags={"商品相关接口"},
      *     description="搜索产品",
@@ -28,7 +30,14 @@ class ProductController extends Controller
      *         name="keyword",
      *         in="path",
      *         description="搜索关键词",
-     *         required=true,
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="cat",
+     *         in="path",
+     *         description="类目的id,多个用','分割",
+     *         required=false,
      *         type="string",
      *     ),
      *     @SWG\Parameter(
@@ -55,13 +64,14 @@ class ProductController extends Controller
      *     )
      * )
      */
-    public function search($keyword='', $limit=8, $page=1)
+    public function search()
     {
-        if (!empty($keyword)){
-            $data = $this->productService->search($keyword,$limit,$page);
-            return ApiReturn::handle('SUCCESS',$data,$limit,$page);
-        }
-        return ApiReturn::handle('PARAMETER_LOST');
+        $limit = request('limit',$this->limit);
+        $page = request('page',$this->page);
+        $keyword = request('keyword','');
+        $cat = request('cat','');
+        $data = $this->productService->search($keyword,$cat,$limit,$page);
+        return ApiReturn::handle('SUCCESS',$data,$limit,$page);
     }
 
     /**

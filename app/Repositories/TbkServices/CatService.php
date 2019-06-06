@@ -1,10 +1,12 @@
 <?php
 namespace App\Repositories\TbkServices;
 
+use App\Models\Category;
+
 class CatService
 {
     public function list()
     {
-        return ['女装','鞋帽'];
+        return (new Category())->where('parent_cid',0)->get();
     }
 }

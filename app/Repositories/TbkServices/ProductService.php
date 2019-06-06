@@ -31,7 +31,7 @@ class ProductService
     }
 
     //通用物料搜索API（导购）
-    public function search($keyword,$limit=8,$page=1)
+    public function search($keyword,$cat,$limit=8,$page=1)
     {
         $req = new \TbkDgMaterialOptionalRequest;
         $req->setPageSize($limit);
@@ -39,6 +39,9 @@ class ProductService
         $req->setPlatform('2');
         if (!empty($keyword)){
             $req->setQ($keyword);
+        }
+        if (!empty($cat)){
+            $req->setCat($cat);
         }else{
             $req->setCat(config('tbk.cat'));
         }
