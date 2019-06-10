@@ -27,6 +27,20 @@ class ApkController extends Controller
      *         type="string",
      *     ),
      *     @SWG\Parameter(
+     *         name="version_code",
+     *         in="path",
+     *         description="版本递增数",
+     *         required=false,
+     *         type="integer",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="version",
+     *         in="path",
+     *         description="版本号",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
      *         name="limit",
      *         in="path",
      *         description="每页显示的条数,默认20条,获取历史版本使用",
@@ -53,10 +67,16 @@ class ApkController extends Controller
     public function getApk()
     {
         $situation = request('situation','new');
+        $version_code = request('version_code',0);
         $apk = null;
         switch ($situation){
             case 'new':
                 $apk = (new Apk())->orderBy('create_time','desc')->first();
+                if ($apk->version_code > $version_code){
+                    $apk->hasnewversion = 1;
+                }else{
+                    $apk->hasnewversion = 0;
+                }
                 break;
             case 'history':
                 $limit = request('limit',$this->limit);
