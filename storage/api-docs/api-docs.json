@@ -15,6 +15,87 @@
         "http"
     ],
     "paths": {
+        "/apk": {
+            "get": {
+                "tags": [
+                    "APK\u76f8\u5173\u63a5\u53e3"
+                ],
+                "summary": "\u83b7\u53d6apk\u8d44\u6e90",
+                "description": "\u83b7\u53d6\u6700\u65b0apk\u7248\u672c\u6216\u8005\u5386\u53f2\u7248\u672c",
+                "operationId": "apk_resource",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "situation",
+                        "in": "path",
+                        "description": "new:\u6700\u65b0\u7248\u672c(\u9ed8\u8ba4)\uff0chistory:\u5386\u53f2\u7248\u672c",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "path",
+                        "description": "\u6bcf\u9875\u663e\u793a\u7684\u6761\u6570,\u9ed8\u8ba420\u6761,\u83b7\u53d6\u5386\u53f2\u7248\u672c\u4f7f\u7528",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "page",
+                        "in": "path",
+                        "description": "\u9875\u7801\uff0c\u9ed8\u8ba4\u4e3a\u7b2c1\u9875\uff0c\u83b7\u53d6\u5386\u53f2\u7248\u672c\u4f7f\u7528",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "SUCCESS"
+                    },
+                    "422": {
+                        "description": "\u8be6\u89c1\u9519\u8bef\u9644\u4ef6"
+                    }
+                }
+            }
+        },
+        "/feedback": {
+            "post": {
+                "tags": [
+                    "\u53cd\u9988\u76f8\u5173\u63a5\u53e3"
+                ],
+                "summary": "\u63d0\u4ea4\u610f\u89c1\u53cd\u9988",
+                "description": "\u63d0\u4ea4\u610f\u89c1\u53cd\u9988",
+                "operationId": "feedback_store",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "login-token",
+                        "in": "header",
+                        "description": "\u767b\u5f55token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "content",
+                        "in": "formData",
+                        "description": "\u610f\u89c1\u53cd\u9988\u5185\u5bb9",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "SUCCESS"
+                    },
+                    "422": {
+                        "description": "\u8be6\u89c1\u9519\u8bef\u9644\u4ef6"
+                    }
+                }
+            }
+        },
         "/index": {
             "get": {
                 "tags": [
@@ -65,18 +146,11 @@
                 ],
                 "parameters": [
                     {
-                        "name": "keyword",
+                        "name": "start_dsr",
                         "in": "path",
-                        "description": "\u641c\u7d22\u5173\u952e\u8bcd",
+                        "description": "\u5546\u54c1\u7b5b\u9009(\u7279\u5b9a\u5a92\u4f53\u652f\u6301)-\u5e97\u94fadsr\u8bc4\u5206\u3002\u7b5b\u9009\u5927\u4e8e\u7b49\u4e8e\u5f53\u524d\u8bbe\u7f6e\u7684\u5e97\u94fadsr\u8bc4\u5206\u7684\u5546\u54c10-50000\u4e4b\u95f4",
                         "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "cat",
-                        "in": "path",
-                        "description": "\u7c7b\u76ee\u7684id,\u591a\u4e2a\u7528','\u5206\u5272",
-                        "required": false,
-                        "type": "string"
+                        "type": "integer"
                     },
                     {
                         "name": "limit",
@@ -91,6 +165,132 @@
                         "description": "\u9875\u7801\uff0c\u9ed8\u8ba4\u4e3a\u7b2c1\u9875",
                         "required": false,
                         "type": "integer"
+                    },
+                    {
+                        "name": "platform",
+                        "in": "path",
+                        "description": "\u94fe\u63a5\u5f62\u5f0f\uff1a1\uff1aPC\uff0c2\uff1a\u65e0\u7ebf\uff0c\u9ed8\u8ba4\uff1a\uff11",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "end_tk_rate",
+                        "in": "path",
+                        "description": "\u5546\u54c1\u7b5b\u9009-\u6dd8\u5ba2\u4f63\u91d1\u6bd4\u7387\u4e0a\u9650\u3002\u5982\uff1a1234\u8868\u793a12.34%",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "start_tk_rate",
+                        "in": "path",
+                        "description": "\u5546\u54c1\u7b5b\u9009-\u6dd8\u5ba2\u4f63\u91d1\u6bd4\u7387\u4e0b\u9650\u3002\u5982\uff1a1234\u8868\u793a12.34%",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "end_price",
+                        "in": "path",
+                        "description": "\u5546\u54c1\u7b5b\u9009-\u6298\u6263\u4ef7\u8303\u56f4\u4e0a\u9650\u3002\u5355\u4f4d\uff1a\u5143",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "start_price",
+                        "in": "path",
+                        "description": "\u5546\u54c1\u7b5b\u9009-\u6298\u6263\u4ef7\u8303\u56f4\u4e0b\u9650\u3002\u5355\u4f4d\uff1a\u5143",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "is_overseas",
+                        "in": "path",
+                        "description": "\u5546\u54c1\u7b5b\u9009-\u662f\u5426\u6d77\u5916\u5546\u54c1\u3002true\u8868\u793a\u5c5e\u4e8e\u6d77\u5916\u5546\u54c1\uff0cfalse\u6216\u4e0d\u8bbe\u7f6e\u8868\u793a\u4e0d\u9650",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "is_tmall",
+                        "in": "path",
+                        "description": "\u5546\u54c1\u7b5b\u9009-\u662f\u5426\u5929\u732b\u5546\u54c1\u3002true\u8868\u793a\u5c5e\u4e8e\u5929\u732b\u5546\u54c1\uff0cfalse\u6216\u4e0d\u8bbe\u7f6e\u8868\u793a\u4e0d\u9650",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "sort",
+                        "in": "path",
+                        "description": "\u6392\u5e8f_des\uff08\u964d\u5e8f\uff09\uff0c\u6392\u5e8f_asc\uff08\u5347\u5e8f\uff09\uff0c\u9500\u91cf\uff08total_sales\uff09\uff0c\u6dd8\u5ba2\u4f63\u91d1\u6bd4\u7387\uff08tk_rate\uff09\uff0c \u7d2f\u8ba1\u63a8\u5e7f\u91cf\uff08tk_total_sales\uff09\uff0c\u603b\u652f\u51fa\u4f63\u91d1\uff08tk_total_commi\uff09\uff0c\u4ef7\u683c\uff08price\uff09",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "itemloc",
+                        "in": "path",
+                        "description": "\u5546\u54c1\u7b5b\u9009-\u6240\u5728\u5730 \u5982 \u676d\u5dde",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "cat",
+                        "in": "path",
+                        "description": "\u7c7b\u76ee\u7684id,\u591a\u4e2a\u7528','\u5206\u5272",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "keyword",
+                        "in": "path",
+                        "description": "\u641c\u7d22\u5173\u952e\u8bcd",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "has_coupon",
+                        "in": "path",
+                        "description": "\u4f18\u60e0\u5238\u7b5b\u9009-\u662f\u5426\u6709\u4f18\u60e0\u5238\u3002true\u8868\u793a\u8be5\u5546\u54c1\u6709\u4f18\u60e0\u5238\uff0cfalse\u6216\u4e0d\u8bbe\u7f6e\u8868\u793a\u4e0d\u9650",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "need_free_shipment",
+                        "in": "path",
+                        "description": "\u5546\u54c1\u7b5b\u9009-\u662f\u5426\u5305\u90ae\u3002true\u8868\u793a\u5305\u90ae\uff0cfalse\u6216\u4e0d\u8bbe\u7f6e\u8868\u793a\u4e0d\u9650",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "need_prepay",
+                        "in": "path",
+                        "description": "\u5546\u54c1\u7b5b\u9009-\u662f\u5426\u52a0\u5165\u6d88\u8d39\u8005\u4fdd\u969c\u3002true\u8868\u793a\u52a0\u5165\uff0cfalse\u6216\u4e0d\u8bbe\u7f6e\u8868\u793a\u4e0d\u9650",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "include_pay_rate_30",
+                        "in": "path",
+                        "description": "\u5546\u54c1\u7b5b\u9009(\u7279\u5b9a\u5a92\u4f53\u652f\u6301)-\u6210\u4ea4\u8f6c\u5316\u662f\u5426\u9ad8\u4e8e\u884c\u4e1a\u5747\u503c\u3002True\u8868\u793a\u5927\u4e8e\u7b49\u4e8e\uff0cfalse\u6216\u4e0d\u8bbe\u7f6e\u8868\u793a\u4e0d\u9650",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "include_good_rate",
+                        "in": "path",
+                        "description": "\u5546\u54c1\u7b5b\u9009-\u597d\u8bc4\u7387\u662f\u5426\u9ad8\u4e8e\u884c\u4e1a\u5747\u503c\u3002True\u8868\u793a\u5927\u4e8e\u7b49\u4e8e\uff0cfalse\u6216\u4e0d\u8bbe\u7f6e\u8868\u793a\u4e0d\u9650",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "include_rfd_rate",
+                        "in": "path",
+                        "description": "\u54c1\u7b5b\u9009(\u7279\u5b9a\u5a92\u4f53\u652f\u6301)-\u9000\u6b3e\u7387\u662f\u5426\u4f4e\u4e8e\u884c\u4e1a\u5747\u503c\u3002True\u8868\u793a\u5927\u4e8e\u7b49\u4e8e\uff0cfalse\u6216\u4e0d\u8bbe\u7f6e\u8868\u793a\u4e0d\u9650",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "npx_level",
+                        "in": "path",
+                        "description": "\u5546\u54c1\u7b5b\u9009-\u725b\u76ae\u7663\u7a0b\u5ea6\u3002\u53d6\u503c\uff1a1\u4e0d\u9650\uff0c2\u65e0\uff0c3\u8f7b\u5fae,\u9ed8\u8ba42",
+                        "required": false,
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
@@ -103,7 +303,7 @@
                 }
             }
         },
-        "/product/show/{item_id}/{coupon_id}": {
+        "/product/show": {
             "get": {
                 "tags": [
                     "\u5546\u54c1\u76f8\u5173\u63a5\u53e3"
@@ -153,6 +353,34 @@
                 ],
                 "parameters": [
                     {
+                        "name": "client",
+                        "in": "header",
+                        "description": "\u767b\u5f55\u7ec8\u7aef1\u5b89\u5353",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "clientinfo",
+                        "in": "header",
+                        "description": "\u7ec8\u7aef\u4fe1\u606f",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "location",
+                        "in": "header",
+                        "description": "\u767b\u5f55\u5730\u70b9",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "other",
+                        "in": "header",
+                        "description": "\u5176\u4ed6\u4fe1\u606f",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
                         "name": "login_type",
                         "in": "formData",
                         "description": "\u6682\u652f\u63011\u7b2c\u4e09\u65b9\u6388\u6743\u767b\u5f55",
@@ -197,7 +425,7 @@
                     {
                         "name": "email",
                         "in": "formData",
-                        "description": "\u5904\u7406\u7ed3\u679c\u56de\u8c03URL",
+                        "description": "\u90ae\u7bb1\u5730\u5740",
                         "required": false,
                         "type": "string"
                     }

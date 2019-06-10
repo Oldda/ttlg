@@ -31,21 +31,69 @@ class ProductService
     }
 
     //通用物料搜索API（导购）
-    public function search($keyword,$cat,$limit=8,$page=1)
+    public function search($input)
     {
         $req = new \TbkDgMaterialOptionalRequest;
-        $req->setPageSize($limit);
-        $req->setPageNo("$page");
-        $req->setPlatform('2');
-        if (!empty($keyword)){
-            $req->setQ($keyword);
+        if (isset($input['start_dsr'])){
+            $req->setStartDsr($input['start_dsr']);
         }
-        if (!empty($cat)){
-            $req->setCat($cat);
-        }else{
+        if (isset($input['platform'])){
+            $req->setPlatform($input['platform']);
+        }
+        if (isset($input['end_tk_rate'])){
+            $req->setEndTkRate($input['end_tk_rate']);
+        }
+        if (isset($input['start_dsr'])){
+            $req->setStartTkRate($input['start_dsr']);
+        }
+        if (isset($input['end_price'])){
+            $req->setEndPrice($input['end_price']);
+        }
+        if (isset($input['start_price'])){
+            $req->setStartPrice($input['start_price']);
+        }
+        if (isset($input['is_overseas'])){
+            $req->setIsOverseas($input['is_overseas']);
+        }
+        if (isset($input['is_tmall'])){
+            $req->setIsTmall($input['is_tmall']);
+        }
+        if (isset($input['sort'])){
+            $req->setSort($input['sort']);
+        }
+        if (isset($input['itemloc'])){
+            $req->setItemloc($input['itemloc']);
+        }
+        if (isset($input['need_free_shipment'])){
+            $req->setNeedFreeShipment($input['need_free_shipment']);
+        }
+        if (isset($input['need_prepay'])){
+            $req->setNeedPrepay($input['need_prepay']);
+        }
+        if (isset($input['include_pay_rate_30'])){
+            $req->setIncludePayRate30($input['include_pay_rate_30']);
+        }
+        if (isset($input['include_good_rate'])){
+            $req->setIncludeGoodRate($input['include_good_rate']);
+        }
+        if (isset($input['include_rfd_rate'])){
+            $req->setIncludeRfdRate($input['include_rfd_rate']);
+        }
+        if (isset($input['npx_level'])){
+            $req->setNpxLevel($input['npx_level']);
+        }
+        if (isset($input['keyword'])){
+            $req->setQ($input['keyword']);
+        }
+        if (isset($input['cat'])){
+            $req->setCat($input['cat']);
+        }
+        if (!isset($input['keyword']) && !isset($input['cat'])){
             $req->setCat(config('tbk.cat'));
         }
-        $req->setHasCoupon("true");
+        $req->setPageSize($input['limit']);
+        $req->setPageNo($input['page']);
+        $req->setHasCoupon($input['has_coupon']??'true');
         $req->setAdzoneId("482302086");
         $resp = $this->client->execute($req);
         return $resp->result_list->map_data??$resp;

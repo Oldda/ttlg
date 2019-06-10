@@ -19,6 +19,7 @@ class IndexController extends Controller
     private $page = 1;
     public function __construct(CatService $catService, BannerService $bannerService, ChannelService $channelService, ProductService $productService)
     {
+        parent::__construct();
         $this->catService = $catService;
         $this->bannerService = $bannerService;
         $this->channelService = $channelService;
@@ -59,13 +60,15 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $limit = request('limit',$this->limit);
-        $page = request('page',$this->page);
+        $input = [
+            'limit' => request('limit',$this->limit),
+            'page'  => request('page',$this->page)
+        ];
         $data = array();
         $data['cat'] = $this->catService->list(); //分类
         $data['banner'] = $this->bannerService->list(); //banner图
         $data['channel'] = $this->channelService->list();//频道
-        $data['productList'] = $this->productService->search('','',$limit,$page);
-        return ApiReturn::handle('SUCCESS',$data,$limit,$page);
+        $data['productList'] = $this->productService->search($input);
+        return ApiReturn::handle('SUCCESS',$data,$input['limit'],$input['page']);
     }
 }
