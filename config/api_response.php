@@ -56,4 +56,10 @@ return [
         'response_code' => 200,
         'msg' => '请求成功！'
     ],
+    //主题相关
+    'THEME_ALREADY_DOWN' => [
+        'status' => false,
+        'response_code' => 1001,
+        'msg' => '主题已下架，不可使用！'
+    ],
 ];

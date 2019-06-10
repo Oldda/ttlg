@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\ClientApi;
 
 use App\Facades\ApiReturn;
+use App\Models\Guide;
+use App\Models\StartImg;
 use App\Models\Theme;
 use App\Repositories\TbkServices\BannerService;
 use App\Repositories\TbkServices\CatService;
@@ -108,11 +110,62 @@ class IndexController extends Controller
         if (!$theme){
             return ApiReturn::handle('NOT_FOUND_ERROR');
         }
+        if ($theme->status != 1){
+            return ApiReturn::handle('THEME_ALREADY_DOWN');
+        }
         $data = array(
             'banner' => $this->bannerService->list($theme->banner_position_keyword)??'', //banner图
             'channel' => $this->channelService->list($theme->channel_position_keyword)??'',
             'productList' => $this->productService->search(json_decode($theme->select_rule,true))
         );
+        return ApiReturn::handle('SUCCESS',$data);
+    }
+
+    /**
+     * @SWG\Get(
+     *     path="/guide",
+     *     summary="引导图",
+     *     tags={"首页相关接口"},
+     *     description="引导图",
+     *     operationId="guide_index",
+     *     produces={"application/json"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="SUCCESS"
+     *     ),
+     *     @SWG\Response(
+     *         response=422,
+     *         description="详见错误附件",
+     *     )
+     * )
+     */
+    public function guideImg()
+    {
+        $data = (new Guide())->where('status',1)->orderBy('sort','desc')->get();
+        return ApiReturn::handle('SUCCESS',$data);
+    }
+
+    /**
+     * @SWG\Get(
+     *     path="/start_img",
+     *     summary="启动图",
+     *     tags={"首页相关接口"},
+     *     description="启动图",
+     *     operationId="start_img_index",
+     *     produces={"application/json"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="SUCCESS"
+     *     ),
+     *     @SWG\Response(
+     *         response=422,
+     *         description="详见错误附件",
+     *     )
+     * )
+     */
+    public function startImg()
+    {
+        $data = (new StartImg())->where('status',1)->orderBy('id','desc')->first();
         return ApiReturn::handle('SUCCESS',$data);
     }
 }

@@ -2,7 +2,9 @@
 //天天乐购app路由
 Route::group(['namespace'=>'ClientApi'],function (){
     Route::get('/index','IndexController@index'); //首页
-    Route::get('/theme','IndexController@theme'); //618主题页
+    Route::get('/theme','IndexController@theme'); //主题页
+    Route::get('/guide','IndexController@guideImg'); //引导图
+    Route::get('/start_img','IndexController@startImg'); //启动图
     /**
      * 商品路由
      */
