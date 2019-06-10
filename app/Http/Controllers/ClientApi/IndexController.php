@@ -66,7 +66,7 @@ class IndexController extends Controller
         ];
         $data = array();
         $data['cat'] = $this->catService->list(); //分类
-        $data['banner'] = $this->bannerService->list(); //banner图
+        $data['banner'] = $this->bannerService->list(1); //banner图
         $data['channel'] = $this->channelService->list();//频道
         $data['productList'] = $this->productService->search($input);
         return ApiReturn::handle('SUCCESS',$data,$input['limit'],$input['page']);
@@ -113,6 +113,11 @@ class IndexController extends Controller
             'keyword' => '618',
             'has_coupon' => 'true'
         ];
-        return ApiReturn::handle('SUCCESS',$this->productService->search($input),$input['limit'],$input['page']);
+        $data = array(
+            'banner' => $this->bannerService->list(2), //banner图
+            'productList' => $this->productService->search($input)
+        );
+
+        return ApiReturn::handle('SUCCESS',$data,$input['limit'],$input['page']);
     }
 }
