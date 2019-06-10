@@ -188,7 +188,7 @@ class ProductController extends Controller
     {
         $input = request()->all();
         $input['limit'] = request('limit',$this->limit);
-        $input['page'] = request('limit',$this->page);
+        $input['page'] = request('page',$this->page);
         $data = $this->productService->search($input);
         return ApiReturn::handle('SUCCESS',$data,$input['limit'],$input['page']);
     }
