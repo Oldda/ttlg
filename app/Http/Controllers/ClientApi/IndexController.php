@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\ClientApi;
 
 use App\Facades\ApiReturn;
+use App\Models\Theme;
 use App\Repositories\TbkServices\BannerService;
 use App\Repositories\TbkServices\CatService;
 use App\Repositories\TbkServices\ChannelService;
@@ -66,8 +67,8 @@ class IndexController extends Controller
         ];
         $data = array();
         $data['cat'] = $this->catService->list(); //分类
-        $data['banner'] = $this->bannerService->list(1); //banner图
-        $data['channel'] = $this->channelService->list();//频道
+        $data['banner'] = $this->bannerService->list('index'); //banner图
+        $data['channel'] = $this->channelService->list('index');//频道
         $data['productList'] = $this->productService->search($input);
         return ApiReturn::handle('SUCCESS',$data,$input['limit'],$input['page']);
     }
@@ -81,17 +82,10 @@ class IndexController extends Controller
      *     operationId="theme_index",
      *     produces={"application/json"},
      *     @SWG\Parameter(
-     *         name="limit",
+     *         name="theme_id",
      *         in="path",
-     *         description="每页显示的条数,默认8条",
-     *         required=false,
-     *         type="integer",
-     *     ),
-     *     @SWG\Parameter(
-     *         name="page",
-     *         in="path",
-     *         description="页码，默认为第1页",
-     *         required=false,
+     *         description="主题的id",
+     *         required=true,
      *         type="integer",
      *     ),
      *     @SWG\Response(
@@ -106,18 +100,19 @@ class IndexController extends Controller
      */
     public function theme()
     {
-        $input = [
-            'limit' => request('limit',$this->limit),
-            'page' => request('limit',$this->page),
-            'sort' => 'total_sales_des',
-            'keyword' => '618',
-            'has_coupon' => 'true'
-        ];
+        $theme_id = request('theme_id','');
+        if (empty($theme_id)){
+            return ApiReturn::handle('PARAMETER_LOST');
+        }
+        $theme = (new Theme())->find($theme_id);
+        if (!$theme){
+            return ApiReturn::handle('NOT_FOUND_ERROR');
+        }
         $data = array(
-            'banner' => $this->bannerService->list(2), //banner图
-            'productList' => $this->productService->search($input)
+            'banner' => $this->bannerService->list($theme->banner_position_keyword)??'', //banner图
+            'channel' => $this->channelService->list($theme->channel_position_keyword)??'',
+            'productList' => $this->productService->search(json_decode($theme->select_rule,true))
         );
-
-        return ApiReturn::handle('SUCCESS',$data,$input['limit'],$input['page']);
+        return ApiReturn::handle('SUCCESS',$data);
     }
 }

@@ -6,11 +6,11 @@ use App\Models\Channel;
 
 class ChannelService
 {
-    public function list($limit=null)
+    public function list($position)
     {
         return (new Channel())
             ->where('status',1)
-            ->where('position',1)
+            ->where('position',$position)
             ->whereDate('start_time','<=',date('Y-m-d'))
             ->whereDate('end_time','>=',date('Y-m-d'))
             ->orderBy('sort','desc')
