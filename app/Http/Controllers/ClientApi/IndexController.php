@@ -71,4 +71,48 @@ class IndexController extends Controller
         $data['productList'] = $this->productService->search($input);
         return ApiReturn::handle('SUCCESS',$data,$input['limit'],$input['page']);
     }
+
+    /**
+     * @SWG\Get(
+     *     path="/theme",
+     *     summary="618主题页",
+     *     tags={"首页相关接口"},
+     *     description="618主题活动页面数据",
+     *     operationId="theme_index",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="limit",
+     *         in="path",
+     *         description="每页显示的条数,默认8条",
+     *         required=false,
+     *         type="integer",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="page",
+     *         in="path",
+     *         description="页码，默认为第1页",
+     *         required=false,
+     *         type="integer",
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="SUCCESS"
+     *     ),
+     *     @SWG\Response(
+     *         response=422,
+     *         description="详见错误附件",
+     *     )
+     * )
+     */
+    public function theme()
+    {
+        $input = [
+            'limit' => request('limit',$this->limit),
+            'page' => request('limit',$this->page),
+            'sort' => 'total_sales_des',
+            'keyword' => '618',
+            'has_coupon' => 'true'
+        ];
+        return ApiReturn::handle('SUCCESS',$this->productService->search($input),$input['limit'],$input['page']);
+    }
 }
