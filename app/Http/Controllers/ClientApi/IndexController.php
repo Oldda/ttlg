@@ -141,7 +141,7 @@ class IndexController extends Controller
      */
     public function guideImg()
     {
-        $data = (new Guide())->where('status',1)->orderBy('sort','desc')->get();
+        $data = (new Guide())->where('status',1)->where('cate',2)->orderBy('sort','desc')->get();
         return ApiReturn::handle('SUCCESS',$data);
     }
 
@@ -165,7 +165,7 @@ class IndexController extends Controller
      */
     public function startImg()
     {
-        $data = (new StartImg())->where('status',1)->orderBy('id','desc')->first();
+        $data = (new Guide())->where('status',1)->where('cate',1)->orderBy('sort','desc')->first();
         return ApiReturn::handle('SUCCESS',$data);
     }
 }
