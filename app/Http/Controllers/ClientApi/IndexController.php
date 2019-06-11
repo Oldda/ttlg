@@ -65,7 +65,7 @@ class IndexController extends Controller
     {
         $input = [
             'limit' => request('limit',$this->limit),
-            'page'  => request('page',$this->page)
+            'page'  => request('page',$this->page),
         ];
         $data = array();
         $data['cat'] = $this->catService->list(); //分类

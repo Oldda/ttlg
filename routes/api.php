@@ -5,6 +5,21 @@ Route::group(['namespace'=>'ClientApi'],function (){
     Route::get('/theme','IndexController@theme'); //主题页
     Route::get('/guide','IndexController@guideImg'); //引导图
     Route::get('/start_img','IndexController@startImg'); //启动图
+    Route::get('/count/{cat_id}',function($cat_id){
+        header("Content-type: text/html; charset=utf-8");
+        include "../sdks/taobao/TopSdk.php";
+        $c = new \TopClient;
+        $c->appkey = '27570650';
+        $c->secretKey = 'fa163386f944c080bd16bf8dd3e9fba8';
+        $c->format = 'json';
+        $req = new \TbkDgMaterialOptionalRequest;
+        $req->setAdzoneId("482302086");
+        $req->setCat($cat_id);
+        $req->setHasCoupon("true");
+        $resp = $c->execute($req);
+        $count = $resp->total_results??'可能没有该分类，获取数量失败';
+        echo $count;
+    });
     /**
      * 商品路由
      */
