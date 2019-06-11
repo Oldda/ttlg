@@ -56,6 +56,11 @@ return [
         'response_code' => 200,
         'msg' => '请求成功！'
     ],
+    'JSON_ERROR' => [
+        'status' => true,
+        'response_code' => 201,
+        'msg' => 'json参数解析错误！'
+    ],
     //主题相关
     'THEME_ALREADY_DOWN' => [
         'status' => false,

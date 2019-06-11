@@ -103,6 +103,8 @@ class IndexController extends Controller
     public function theme()
     {
         $theme_id = request('theme_id','');
+        $limit = request('limit',8);
+        $page = request('page',1);
         if (empty($theme_id)){
             return ApiReturn::handle('PARAMETER_LOST');
         }
@@ -113,10 +115,16 @@ class IndexController extends Controller
         if ($theme->status != 1){
             return ApiReturn::handle('THEME_ALREADY_DOWN');
         }
+        $json = json_decode($theme->select_rule,true);
+        if (!$json){
+            return ApiReturn::handle('JSON_ERROR');
+        }
+        $json['limit'] = $limit;
+        $json['page'] = $page;
         $data = array(
-            'banner' => $this->bannerService->list($theme->banner_position_keyword)??'', //banner图
+            'banner' => $this->bannerService->list($theme->banner_position_keyword)->first()??'', //banner图
             'channel' => $this->channelService->list($theme->channel_position_keyword)??'',
-            'productList' => $this->productService->search(json_decode($theme->select_rule,true))
+            'productList' => $this->productService->search($json)
         );
         return ApiReturn::handle('SUCCESS',$data);
     }
