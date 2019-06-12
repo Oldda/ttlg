@@ -78,9 +78,9 @@ class IndexController extends Controller
     /**
      * @SWG\Get(
      *     path="/theme",
-     *     summary="618主题页",
+     *     summary="活动，主题页面数据",
      *     tags={"首页相关接口"},
-     *     description="618主题活动页面数据",
+     *     description="活动，主题页面数据"",
      *     operationId="theme_index",
      *     produces={"application/json"},
      *     @SWG\Parameter(
@@ -128,10 +128,10 @@ class IndexController extends Controller
         }
         $data = array(
             'banner' => $this->bannerService->list($theme->banner_position_keyword)->first()??'', //banner图
-            'channel' => $this->channelService->list($theme->channel_position_keyword)??'',
+            'channel' => $this->channelService->list($theme->channel_position_keyword)??[],
             'productList' => $this->productService->search($json)
         );
-        return ApiReturn::handle('SUCCESS',$data);
+        return ApiReturn::handle('SUCCESS',$data,$json['limit'],$json['page']);
     }
 
     /**
