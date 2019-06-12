@@ -95,6 +95,13 @@ class UserController extends Controller
      *         required=true,
      *         type="string",
      *     ),
+	 *     @SWG\Parameter(
+     *         name="union_auth_token",
+     *         in="formData",
+     *         description="其他凭证信息，如微信的unionid 淘宝的opensid",
+     *         required=false,
+     *         type="string",
+     *     ),
      *     @SWG\Parameter(
      *         name="nickname",
      *         in="formData",

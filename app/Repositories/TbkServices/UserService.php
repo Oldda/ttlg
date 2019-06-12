@@ -22,12 +22,14 @@ class UserService
                     if (!$request->nickname || !$request->thumbnail){
                         return ApiReturn::handle('PARAMETER_LOST');
                     }
+					$union = $request->union_auth_token??'';
                     return $this->store([
                         'nickname' => $request->nickname,
                         'thumbnail'=> $request->thumbnail
                     ],[
                         'auth_platform' => $request->auth_platform,
-                        'auth_token' => $request->auth_token
+                        'auth_token' => $request->auth_token,
+						'union_auth_token' => $union
                     ]);
                 }
                 break;
