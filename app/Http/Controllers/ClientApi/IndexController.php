@@ -80,7 +80,7 @@ class IndexController extends Controller
      *     path="/theme",
      *     summary="活动，主题页面数据",
      *     tags={"首页相关接口"},
-     *     description="活动，主题页面数据"",
+     *     description="活动，主题页面数据",
      *     operationId="theme_index",
      *     produces={"application/json"},
      *     @SWG\Parameter(
