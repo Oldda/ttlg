@@ -121,10 +121,10 @@ class IndexController extends Controller
         }
         $json['limit'] = $limit;
         $json['page'] = $page;
-        $input = request()->except(['limit','page']);
+        $input = request()->except(['limit','page','template']);
         if (count($input) > 1){
             unset($input['theme_id']);
-            $json = request()->except(['theme_id']);
+            $json = request()->except(['theme_id','template']);
         }
         $data = array(
             'banner' => $this->bannerService->list($theme->banner_position_keyword)->first()??'', //banner图
