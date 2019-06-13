@@ -42,10 +42,10 @@ class CustomLoginMiddleware
             return ApiReturn::handle('TOKEN_EXPIRED');
         }
         //更新token
-        if ($login_log->expire_at - time() <= 600){
-            $login_log->expired_at = time() + 60 * 60;
-            $login_log->save();
-        }
+//        if ($login_log->expire_at - time() <= 600){
+//            $login_log->expired_at = time() + 60 * 60;
+//            $login_log->save();
+//        }
         $request->attributes->add(['user_id'=>$data['user_id']]);//添加参数
         return $next($request);
     }

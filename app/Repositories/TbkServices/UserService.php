@@ -69,7 +69,7 @@ class UserService
             'client' => $request->header('client')??1,
             'clientinfo' => $request->header('client_info')??'',
             'location' => $request->header('location')??'',
-            'expire_at' => time() + 60 * 60,//1小时失效
+            'expire_at' => time() + 60 * 60 * 24 * 365,//一年之后失效
             'user_id' => $user_id,
             'other' => $request->header('other')??''
         );

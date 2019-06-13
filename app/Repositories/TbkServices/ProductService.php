@@ -91,9 +91,15 @@ class ProductService
         if (!isset($input['keyword']) && !isset($input['cat'])){
             $req->setCat(config('tbk.cat'));
         }
-        $req->setPageSize($input['limit']);
-        $req->setPageNo($input['page']);
-        $req->setHasCoupon($input['has_coupon']??'true');
+        if (isset($input['limit'])){
+            $req->setPageSize($input['limit']);
+        }
+        if (isset($input['page'])){
+            $req->setPageNo($input['page']);
+        }
+        if (isset($input['has_coupon'])){
+            $req->setHasCoupon($input['has_coupon']);
+        }
         $req->setAdzoneId("482302086");
         $resp = $this->client->execute($req);
         return $resp->result_list->map_data??$resp;
