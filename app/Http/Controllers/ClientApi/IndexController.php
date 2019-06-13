@@ -63,6 +63,20 @@ class IndexController extends Controller
      */
     public function index()
     {
+		$cats = [
+			'50010850','50000436','50012354','50010540','50006842','1801',
+			'50003949','50002766','50006843','50011740','1625','50010788','302910',
+			'1705','50002768','50003820','50009146'
+		];
+		$chose = array_rand($cats,10);
+		$str = '';
+		for($i=0;$i<10;$i++){
+			if($i != 9){
+				$str .= $cats[$chose[$i]].',';
+			}else{
+				$str .= $cats[$chose[$i]];
+			}
+		}
         $input = [
             'limit' => request('limit',$this->limit),
             'page'  => request('page',$this->page),
@@ -136,7 +150,7 @@ class IndexController extends Controller
             $json = request()->except(['theme_id','template']);
         }
         $data = array(
-            'banner' => $this->bannerService->list($theme->banner_position_keyword)->first()??'', //banner图
+            'banner' => $this->bannerService->list($theme->banner_position_keyword)->first()??new \StdClass(), //banner图
             'channel' => $this->channelService->list($theme->channel_position_keyword)??[],
             'productList' => $this->productService->search($json)
         );
