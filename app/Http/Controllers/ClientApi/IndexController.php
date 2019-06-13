@@ -66,6 +66,13 @@ class IndexController extends Controller
         $input = [
             'limit' => request('limit',$this->limit),
             'page'  => request('page',$this->page),
+			'sort'  => 'price_desc',
+			'has_coupon'   => 'true',
+			'is_tmall'  => 'true',
+			'need_free_shipment' => 'true',
+			'need_prepay'=>'true',
+			'include_pay_rate_30'=>'true',
+			'include_good_rate'=>'true'
         ];
         $data = array();
         $data['cat'] = $this->catService->list(); //分类
