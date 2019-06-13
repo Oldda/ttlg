@@ -7,6 +7,6 @@ class CatService
 {
     public function list()
     {
-        return (new Category())->where('parent_cid',0)->where('status',1)->get();
+        return (new Category())->where('parent_cid',0)->where('status',1)->orderBy('sort','asc')->get();
     }
 }

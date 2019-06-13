@@ -13,7 +13,7 @@ class ChannelService
             ->where('position',$position)
             ->whereDate('start_time','<=',date('Y-m-d'))
             ->whereDate('end_time','>=',date('Y-m-d'))
-            ->orderBy('sort','desc')
+            ->orderBy('sort','asc')
             ->get();
     }
 }
