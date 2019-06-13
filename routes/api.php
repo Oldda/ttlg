@@ -30,7 +30,6 @@ Route::group(['namespace'=>'ClientApi'],function (){
      */
     Route::resource('/user','UserController');
     Route::post('/login','UserController@login');
-    Route::get('/logout','UserController@logout');
 
     /**
      * APK版本资源
@@ -40,4 +39,5 @@ Route::group(['namespace'=>'ClientApi'],function (){
 //登录中间件路由
 Route::group(['namespace'=>'ClientApi','middleware'=>'login'],function (){
     Route::post('feedback','FeedbackController@store');
+    Route::get('logout','UserController@logout');
 });

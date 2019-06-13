@@ -34,7 +34,7 @@ class CustomLoginMiddleware
             ->where('user_id',$data['user_id'])
             ->orderBy('create_time','desc')
             ->first();
-        if (!$login_log || $login_log->token !== $token){
+        if (!$login_log || $login_log->token != $token){
             return ApiReturn::handle('TOKEN_ERROR');
         }
         //token失效
