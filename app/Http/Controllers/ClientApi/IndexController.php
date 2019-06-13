@@ -73,7 +73,7 @@ class IndexController extends Controller
 			'need_prepay' => 'true',
 			'include_pay_rate_30' => 'true',
 			'include_good_rate' => 'true',
-			'start_price' => '9.9',
+			'start_price' => '9',
 			'end_price' => '100'
         ];
         $data = array();
