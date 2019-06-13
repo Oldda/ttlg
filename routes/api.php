@@ -5,7 +5,7 @@ Route::group(['namespace'=>'ClientApi'],function (){
     Route::get('/theme','IndexController@theme'); //主题页
     Route::get('/guide','IndexController@guideImg'); //引导图
     Route::get('/start_img','IndexController@startImg'); //启动图
-    Route::get('/count/{cat_id}',function($cat_id){
+    Route::get('/count/{cat_id}',function($cat_id){ //仅供产品选品使用
         header("Content-type: text/html; charset=utf-8");
         include "../sdks/taobao/TopSdk.php";
         $c = new \TopClient;
@@ -30,6 +30,11 @@ Route::group(['namespace'=>'ClientApi'],function (){
      */
     Route::resource('/user','UserController');
     Route::post('/login','UserController@login');
+    Route::get('/logout','UserController@logout');
+
+    /**
+     * APK版本资源
+     */
     Route::get('/apk','ApkController@getApk');
 });
 //登录中间件路由

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\ClientApi;
 
 use App\Facades\ApiReturn;
 use App\Http\Requests\UserLoginPost;
+use App\Models\LoginLog;
+use App\Models\User;
 use App\Repositories\TbkServices\UserService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -19,13 +21,37 @@ class UserController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @SWG\Get(
+     *     path="/logout",
+     *     summary="用户登出接口",
+     *     tags={"用户相关接口"},
+     *     description="用户登出",
+     *     operationId="user_logout",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="login-token",
+     *         in="header",
+     *         description="登录状态token",
+     *         required=true,
+     *         type="string",
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="SUCCESS"
+     *     ),
+     *     @SWG\Response(
+     *         response=422,
+     *         description="详见错误附件",
+     *     )
+     * )
      */
-    public function index()
+    public function logout()
     {
-        echo 1;
+        $del = (new LoginLog())->where('user_id',$this->user_id)->delete();
+        if (!$del){
+            return ApiReturn::handle('DELETE_SOURCE_ERROR');
+        }
+        return ApiReturn::handle('SUCCESS');
     }
 
     /**
