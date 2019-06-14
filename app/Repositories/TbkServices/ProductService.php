@@ -23,7 +23,7 @@ class ProductService
     {
         $req = new \TbkDgOptimusMaterialRequest;
         $req->setPageSize($limit);
-        $req->setAdzoneId("482302086");
+        $req->setAdzoneId(config('tbk.adzone_id'));
         $req->setPageNo($page);
         $req->setMaterialId('3756');
         $resp = $this->client->execute($req);
