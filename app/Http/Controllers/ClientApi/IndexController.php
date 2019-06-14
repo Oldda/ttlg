@@ -89,7 +89,8 @@ class IndexController extends Controller
 			'include_good_rate' => 'true',
 			'start_price' => '9',
 			'end_price' => '100',
-			'cat' => '16,30,50008165,1801,21,50002766,50006843,50010788,50011740,35'
+			'cat' => '16,30,50008165,1801,21,50002766,50006843,50010788,50011740,35',
+			'npx_level' => 2
         ];
         $data = array();
         $data['cat'] = $this->catService->list(); //分类
