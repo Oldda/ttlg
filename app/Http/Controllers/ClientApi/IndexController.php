@@ -6,6 +6,7 @@ use App\Facades\ApiReturn;
 use App\Models\Guide;
 use App\Models\StartImg;
 use App\Models\Theme;
+use App\Models\WebVariable;
 use App\Repositories\TbkServices\BannerService;
 use App\Repositories\TbkServices\CatService;
 use App\Repositories\TbkServices\ChannelService;
@@ -206,4 +207,31 @@ class IndexController extends Controller
         $data = (new Guide())->where('status',1)->where('cate',1)->orderBy('sort','desc')->first();
         return ApiReturn::handle('SUCCESS',$data);
     }
+	
+	/**
+     * @SWG\Get(
+     *     path="/variables",
+     *     summary="系统变量",
+     *     tags={"首页相关接口"},
+     *     description="系统变量",
+     *     operationId="index_variables",
+     *     produces={"application/json"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="SUCCESS"
+     *     ),
+     *     @SWG\Response(
+     *         response=422,
+     *         description="详见错误附件",
+     *     )
+     * )
+     */
+	 public function variables()
+	 {
+		 $data = (new WebVariable())->first();
+		 if(!$data){
+			 return ApiReturn::handle('NOT_FOUND_ERROR');
+		 }
+		 return ApiReturn::handle('SUCCESS',$data);
+	 }
 }
