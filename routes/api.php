@@ -5,6 +5,7 @@ Route::group(['namespace'=>'ClientApi'],function (){
     Route::get('/theme','IndexController@theme'); //主题页
     Route::get('/guide','IndexController@guideImg'); //引导图
     Route::get('/start_img','IndexController@startImg'); //启动图
+	Route::get('/variable','IndexController@variables'); //系统变量
     Route::get('/count/{cat_id}',function($cat_id){ //仅供产品选品使用
         header("Content-type: text/html; charset=utf-8");
         include "../sdks/taobao/TopSdk.php";

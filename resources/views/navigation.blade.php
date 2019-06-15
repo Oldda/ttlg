@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class="content">
-		<img src="http://psxc4vqan.bkt.clouddn.com/16926871271560479211.png" class="img-responsive" alt="领券指南"> 
+		<img src="http://psxc4vqan.bkt.clouddn.com/131560592483_.pic_hd.jpg" class="img-responsive" alt="领券指南"> 
     </div>
 </body>
 </html>
