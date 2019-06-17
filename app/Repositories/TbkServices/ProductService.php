@@ -99,7 +99,9 @@ class ProductService
         }
         if (isset($input['has_coupon'])){
             $req->setHasCoupon($input['has_coupon']);
-        }
+        }else{
+			$req->setHasCoupon('true');
+		}
         $req->setAdzoneId(config('tbk.adzone_id'));
         $resp = $this->client->execute($req);
         return $resp->result_list->map_data??$resp;
