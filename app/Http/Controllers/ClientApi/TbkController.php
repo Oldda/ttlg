@@ -193,7 +193,7 @@ class TbkController extends Controller
      *     @SWG\Parameter(
      *         name="ip",
      *         in="path",
-     *         description="ip地址，影响邮费获取，如果不传或者传入不准确，邮费无法精准提供,
+     *         description="ip地址，影响邮费获取，如果不传或者传入不准确，邮费无法精准提供",
      *         required=false,
      *         type="string",
      *     ),
