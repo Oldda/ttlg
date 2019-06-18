@@ -1,28 +1,71 @@
 <!DOCTYPE html>
 <html>
 <script>
-	function ismobile(){
-		var u = navigator.userAgent, app = navigator.appVersion;
-		if(/AppleWebKit.*Mobile/i.test(navigator.userAgent) || (/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/.test(navigator.userAgent))){
-			if(window.location.href.indexOf("?mobile")<0){
-				try{
-					if(/iPhone|mac|iPod|iPad/i.test(navigator.userAgent)){
-						return '0';
-					}else{
-						return '1';
-					}
-				}catch(e){}
-			}
-		}else if( u.indexOf('iPad') > -1){
-			return '0';
-		}else{
-			return '1';
+	// function ismobile(){
+	// 	var u = navigator.userAgent, app = navigator.appVersion;
+	// 	if(/AppleWebKit.*Mobile/i.test(navigator.userAgent) || (/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/.test(navigator.userAgent))){
+	// 		if(window.location.href.indexOf("?mobile")<0){
+	// 			try{
+	// 				if(/iPhone|mac|iPod|iPad/i.test(navigator.userAgent)){
+	// 					return '0';
+	// 				}else{
+	// 					return '1';
+	// 				}
+	// 			}catch(e){}
+	// 		}
+	// 	}else if( u.indexOf('iPad') > -1){
+	// 		return '0';
+	// 	}else{
+	// 		return '1';
+	// 	}
+	// };
+	// const client = ismobile();
+	// if (client != 1){
+	// 	alert('暂不支持IOS版本，敬请期待');
+	// }
+
+	function download (url){
+		var browser = {
+			versions: function () {
+				var u = navigator.userAgent, app = navigator.appVersion;
+				return {         //移动终端浏览器版本信息
+					trident: u.indexOf('Trident') > -1, //IE内核
+					presto: u.indexOf('Presto') > -1, //opera内核
+					webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+					gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+					mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+					ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+					android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或uc浏览器
+					iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+					iPad: u.indexOf('iPad') > -1, //是否iPad
+					webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+				};
+			}(),
+			language: (navigator.browserLanguage || navigator.language).toLowerCase()
 		}
-	};
-	const client = ismobile();
-	if (client != 1){
-		alert('暂不支持IOS版本，敬请期待');
+		if (browser.versions.mobile) {//判断是否是移动设备打开
+			var ua = navigator.userAgent.toLowerCase();//获取判断用的对象
+			if (ua.match(/MicroMessenger/i) == "micromessenger") {
+				//在微信中打开
+				if(browser.versions.android){
+					window.open(url);
+				}
+				if(browser.versions.ios){
+					alert('暂不支持IOS版本，敬请期待')
+				} 
+			}else if(browser.versions.ios) {
+				//在IOS浏览器打开
+				alert('暂不支持IOS版本，敬请期待')
+			}else if(browser.versions.android){
+				//在安卓浏览器打开
+				window.open(url);
+			}
+		} else {
+				//否则就是PC浏览器打开
+				window.open(url);
+		}
 	}
+	
 </script>
 <script>
 var _hmt = _hmt || [];
@@ -32,6 +75,7 @@ var _hmt = _hmt || [];
   var s = document.getElementsByTagName("script")[0]; 
   s.parentNode.insertBefore(hm, s);
 })();
+
 </script>
 <head>
     <meta charset="utf-8">
@@ -52,7 +96,7 @@ var _hmt = _hmt || [];
 	@if(count($imgs)>0)
 		@foreach ($imgs as $img)
 			@if($img->cate == 1)
-				<a href="{{$img->link}}"><img src="{{$img->img}}" alt="{{$img->title}}"/></a>
+				<a><img onclick="download('{{$img->link}}')" src="{{$img->img}}" alt="{{$img->title}}"/></a>
 			@endif
 		@endforeach
 	@endif
