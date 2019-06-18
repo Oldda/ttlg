@@ -15,56 +15,55 @@
 </head>
 <body>
 <div class="wrap">
-    <header class="header"><a href=""><img src="static/img/hd_top.jpg"/></a></header>
+    <header class="header">
+	@if(count($imgs)>0)
+		@foreach ($imgs as $img)
+			@if($img->cate == 1)
+				<a href="{{$img->link}}"><img src="{{$img->img}}" alt="{{$img->title}}"/></a>
+			@endif
+		@endforeach
+	@endif
+	</header>
     <section class="main">
         <ul>
-            <li>
-                <div class="list">
-                    <a href=""><img src="static/img/img.jpg"/></a>
-                    <div class="name">i7-i9-i11蓝牙耳机苹果安卓通用双耳无线入耳式重低音运动耳塞</div>
-                    <div class="price justify">
-                        <p><em>$9.9</em><s>淘宝价￥120</s></p>
-                        <span>已售120件</span>
-                    </div>
-                    <a href=""></a><img src="static/img/sale.jpg"/></a>
-                </div>
-            </li>
-            <li>
-                <div class="list">
-                    <a href=""><img src="static/img/img.jpg"/></a>
-                    <div class="name">i7-i9-i11蓝牙耳机苹果安卓通用双耳无线入耳式重低音运动耳塞</div>
-                    <div class="price justify">
-                        <p><em>$9.9</em><s>淘宝价￥120</s></p>
-                        <span>已售120件</span>
-                    </div>
-                    <a href=""></a><img src="static/img/sale.jpg"/></a>
-                </div>
-            </li>
-            <li>
-                <div class="list">
-                    <a href=""><img src="static/img/img.jpg"/></a>
-                    <div class="name">i7-i9-i11蓝牙耳机苹果安卓通用双耳无线入耳式重低音运动耳塞</div>
-                    <div class="price justify">
-                        <p><em>$9.9</em><s>淘宝价￥120</s></p>
-                        <span>已售120件</span>
-                    </div>
-                    <a href=""></a><img src="static/img/sale.jpg"/></a>
-                </div>
-            </li>
-            <li>
-                <div class="list">
-                    <a href=""><img src="static/img/img.jpg"/></a>
-                    <div class="name">i7-i9-i11蓝牙耳机苹果安卓通用双耳无线入耳式重低音运动耳塞</div>
-                    <div class="price justify">
-                        <p><em>$9.9</em><s>淘宝价￥120</s></p>
-                        <span>已售120件</span>
-                    </div>
-                    <a href=""></a><img src="static/img/sale.jpg"/></a>
-                </div>
-            </li>
-        </div>
+			@if(count($goods)>0)
+				@foreach($goods as $good)
+					<li>
+						<div class="list">
+							<a href="{{$good->coupon_link}}"><img src="{{$good->img}}"/></a>
+							<div class="name">{{$good->goods_name}}</div>
+							<div class="price justify">
+								<p><em>￥{{$good->now_price}}</em><s>淘宝价￥{{$good->tb_price}}</s></p>
+								<span>已售{{$good->sale_num}}件</span>
+							</div>
+							<div class="sale">
+								<img src="static/img/sale_bg.jpg"/>
+								<div class="sale-mc justify">
+									<div class="num">{{$good->coupon_quota}}</div>
+									<div class="info justify">
+										<p class="message center">
+											<span>优惠券</span>
+											<em>{{date('m-d',strtotime($good->start_time))}}至{{date('m-d',strtotime($good->end_time))}}</em>
+										</p>
+										<p class="btn"><a href="{{$good->coupon_link}}"><img src="static/img/button.jpg"/></a></p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+				@endforeach
+			@endif
+        </ul>
     </section>
-    <footer class="footer"><a href=""><img src="static/img/hd_bottom.jpg"/></a></footer>
+    <footer class="footer">
+	@if(count($imgs)>0)
+		@foreach ($imgs as $img)
+			@if($img->cate == 2)
+				<a href="{{$img->link}}"><img src="{{$img->img}}" alt="{{$img->title}}"/></a>
+			@endif
+		@endforeach
+	@endif
+	</footer>
 </div>
 </body>
 </html>

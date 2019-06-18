@@ -1,5 +1,6 @@
 <?php
-
+use App\Models\DownloadImg;
+use App\Models\DownloadGood;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,5 +19,15 @@ Route::get('navigation',function(){
 	return view('navigation');
 });
 Route::get('download',function(){
-	return view('download');
+	$imgs = (new DownloadImg())
+			->where('status',1)
+			->orderBy('sort','asc')
+			->get();
+	$goods = (new DownloadGood())
+			->where('status',1)
+			->whereDate('start_time','<=',date('Y-m-d'))
+			->whereDate('end_time','>=',date('Y-m-d'))
+			->orderBy('sort','asc')
+			->get();
+	return view('download',compact('imgs','goods'));
 });
