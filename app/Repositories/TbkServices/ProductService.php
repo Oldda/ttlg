@@ -194,7 +194,6 @@ class ProductService
     {
         return '暂未开放！';
     }
-    //淘宝客商品猜你喜欢
     //好券清单API【导购】
     public function couponGet($input)
     {
@@ -215,6 +214,15 @@ class ProductService
         return $resp->results->tbk_coupon??[];
     }
     //阿里妈妈推广券信息查询
+    public function coupon($input)
+    {
+        $req = new \TbkCouponGetRequest;
+//        $req->setMe("nfr%2BYTo2k1PX18gaNN%2BIPkIG2PadNYbBnwEsv6mRavWieOoOE3L9OdmbDSSyHbGxBAXjHpLKvZbL1320ML%2BCF5FRtW7N7yJ056Lgym4X01A%3D");
+        $req->setItemId($input['item_id']); //商品id
+        $req->setActivityId($input['coupon_id']);
+        $resp = $this->client->execute($req);
+        return $resp->data??new \stdClass();
+    }
     //淘宝客淘口令
     //淘客媒体内容输出
     //淘宝客新用户订单API--导购
@@ -334,16 +342,5 @@ class ProductService
         $req->setAdzoneId(config('tbk.adzone_id'));
         $resp = $this->client->execute($req);
         return $resp->result_list->map_data??[];
-    }
-
-    //阿里妈妈推广券信息查询
-    public function coupon($input)
-    {
-        $req = new \TbkCouponGetRequest;
-//        $req->setMe("nfr%2BYTo2k1PX18gaNN%2BIPkIG2PadNYbBnwEsv6mRavWieOoOE3L9OdmbDSSyHbGxBAXjHpLKvZbL1320ML%2BCF5FRtW7N7yJ056Lgym4X01A%3D");
-        $req->setItemId($input['item_id']); //商品id
-        $req->setActivityId($input['coupon_id']);
-        $resp = $this->client->execute($req);
-        return $resp->data??new \stdClass();
     }
 }

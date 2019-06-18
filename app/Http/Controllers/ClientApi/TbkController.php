@@ -683,6 +683,7 @@ class TbkController extends Controller
         }
         return ApiReturn::handle('SUCCESS',$this->tbkApi->itemGuessLike($input));
     }
+
     /**
      * @SWG\Get(
      *     path="/coupon_get",
@@ -743,6 +744,48 @@ class TbkController extends Controller
         $input['page'] = request('page',1);
         return ApiReturn::handle('SUCCESS',$this->tbkApi->couponGet($input),$input['limit'],$input['page']);
     }
+
+    /**
+     * @SWG\Get(
+     *     path="/tbk_coupon_get",
+     *     summary=" 阿里妈妈推广券信息查询",
+     *     tags={"淘宝客相关接口"},
+     *     description=" 阿里妈妈推广券信息查询",
+     *     operationId="tbk_coupon_get",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="item_id",
+     *         in="path",
+     *         description="商品id",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
+     *        name="activity_id",
+     *         in="path",
+     *         description="优惠券id",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="SUCCESS"
+     *     ),
+     *     @SWG\Response(
+     *         response=422,
+     *         description="详见错误附件",
+     *     )
+     * )
+     */
+    public function tbkCouponGet()
+    {
+        $input = request()->all();
+        if (!isset($input['item_id']) || !isset($input['activity_id'])){
+            return ApiReturn::handle('PARAMETER_LOST');
+        }
+        return ApiReturn::handle('SUCCESS',$this->tbkApi->coupon($input));
+    }
+    //未完待续
 
     /**
      * @SWG\Get(

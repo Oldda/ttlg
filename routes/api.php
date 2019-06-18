@@ -43,12 +43,12 @@ Route::group(['namespace'=>'ClientApi'],function (){
     Route::get('ju_tqg_get','TbkController@juTqgGet');
     //淘宝客商品猜你喜欢
     Route::get('item_guess_like','TbkController@itemGuessLike');
-
-
-
-
     //好券清单API【导购】
     Route::get('coupon_get','TbkController@couponGet');
+    //阿里妈妈推广券信息查询
+    Route::get('tbk_coupon_get','TbkController@tbkCouponGet');
+
+
     //淘宝客物料下行-导购
     Route::get('optimus_material','TbkController@optimusMaterial');
     /**
