@@ -29,6 +29,8 @@ Route::group(['namespace'=>'ClientApi'],function (){
     Route::get('item_get','TbkController@itemGet');
     //好券清单API【导购】
     Route::get('coupon_get','TbkController@couponGet');
+    //淘宝客物料下行-导购
+    Route::get('optimus_material','TbkController@optimusMaterial');
     /**
      * 商品路由
      */

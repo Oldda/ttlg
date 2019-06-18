@@ -56,6 +56,34 @@ class ProductService
     //淘宝客新用户订单API--导购
     //淘宝客新用户订单API--社交
     //淘宝客物料下行-导购
+    public function optimusMaterial($input)
+    {
+        $req = new \TbkDgOptimusMaterialRequest;
+        $req->setAdzoneId(config('tbk.adzone_id'));
+        $req->setPageSize($input['limit']);
+        $req->setPageNo($input['page']);
+        $req->setMaterialId($input['material_id']);
+        if (isset($input['device_value'])){
+            $req->setDeviceValue($input['device_value']);
+        }
+        if (isset($input['device_encrypt'])){
+            $req->setDeviceEncrypt($input['device_encrypt']);
+        }
+        if (isset($input['device_type'])){
+            $req->setDeviceType($input['device_type']);
+        }
+        if (isset($input['content_id'])){
+            $req->setContentId($input['content_id']);
+        }
+        if (isset($input['content_source'])){
+            $req->setContentSource($input['content_source']);
+        }
+        if (isset($input['item_id'])){
+            $req->setItemId($input['item_id']);
+        }
+        $resp = $this->client->execute($req);
+        return $resp->result_list->map_data??[];
+    }
     // 通用物料搜索API（导购）
     // 拉新活动汇总API--导购
     //拉新活动汇总API--社交
