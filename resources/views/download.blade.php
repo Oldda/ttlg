@@ -42,13 +42,13 @@ var _hmt = _hmt || [];
 							<a href="{{$good->coupon_link}}"><img src="{{$good->img}}"/></a>
 							<div class="name">{{$good->goods_name}}</div>
 							<div class="price justify">
-								<p><em>￥{{$good->now_price}}</em><s>淘宝价￥{{$good->tb_price}}</s></p>
+								<p><em style="font-size:20px;">￥{{$good->now_price}}</em><s>淘宝价￥{{$good->tb_price}}</s></p>
 								<span>已售{{$good->sale_num}}件</span>
 							</div>
 							<div class="sale">
 								<img src="static/img/sale_bg.jpg"/>
 								<div class="sale-mc justify">
-									<div class="num">{{$good->coupon_quota}}</div>
+									<div class="num">￥{{$good->coupon_quota}}</div>
 									<div class="info justify">
 										<p class="message center">
 											<span>优惠券</span>
