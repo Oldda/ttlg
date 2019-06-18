@@ -17,6 +17,34 @@ class ProductService
         $this->client->secretKey = config('tbk.secret');
         $this->client->format = $this->format;
     }
+    //淘宝客商品查询
+
+    // 淘宝客商品关联推荐查询
+    //淘宝客商品详情（简版）
+    //淘宝客店铺查询
+    // 淘宝客店铺关联推荐查询
+    //获取淘宝联盟选品库的宝贝信息
+    //获取淘宝联盟选品库列表
+    // 淘抢购api
+    //链接解析api
+    //淘宝客商品猜你喜欢
+    //好券清单API【导购】
+    //阿里妈妈推广券信息查询
+    //淘宝客淘口令
+    //淘客媒体内容输出
+    //淘宝客新用户订单API--导购
+    //淘宝客新用户订单API--社交
+    //淘宝客物料下行-导购
+    // 通用物料搜索API（导购）
+    // 拉新活动汇总API--导购
+    //拉新活动汇总API--社交
+    //淘客媒体内容效果输出
+    //淘宝客擎天柱通用物料API - 社交
+    //淘礼金创建
+    //淘宝联盟官方活动推广API-媒体
+    //淘宝联盟官方活动推广API-工具
+    //处罚订单查询 -导购-私域用户管理专用
+    //导购淘礼金实例维度报表
 
     //淘宝客物料下行-导购
     public function list($limit=8,$page=1)
@@ -27,7 +55,7 @@ class ProductService
         $req->setPageNo($page);
         $req->setMaterialId('3756');
         $resp = $this->client->execute($req);
-        return $resp->result_list->map_data??$resp;
+        return $resp->result_list->map_data??[];
     }
 
     //通用物料搜索API（导购）
@@ -104,7 +132,7 @@ class ProductService
 		}
         $req->setAdzoneId(config('tbk.adzone_id'));
         $resp = $this->client->execute($req);
-        return $resp->result_list->map_data??$resp;
+        return $resp->result_list->map_data??[];
     }
 
     //淘宝客商品详情（简版）
@@ -115,7 +143,7 @@ class ProductService
         $req->setPlatform("2");
         $req->setIp($_SERVER['REMOTE_ADDR']);
         $resp = $this->client->execute($req);
-        return $resp->results->n_tbk_item[0]??$resp;
+        return $resp->results->n_tbk_item[0]??new \stdClass();
     }
 
     //阿里妈妈推广券信息查询
@@ -126,6 +154,6 @@ class ProductService
         $req->setItemId($item_id); //商品id
         $req->setActivityId($coupon_id);
         $resp = $this->client->execute($req);
-        return $resp->data??$resp;
+        return $resp->data??new \stdClass();
     }
 }
