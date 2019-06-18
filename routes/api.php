@@ -22,8 +22,13 @@ Route::group(['namespace'=>'ClientApi'],function (){
         echo $count;
     });
 
-    //淘宝客系列api数据返回
+    /**
+     * 淘宝客系列api数据返回
+     */
+
     Route::get('item_get','TbkController@itemGet');
+    //好券清单API【导购】
+    Route::get('coupon_get','TbkController@couponGet');
     /**
      * 商品路由
      */

@@ -32,6 +32,24 @@ class ProductService
     //链接解析api
     //淘宝客商品猜你喜欢
     //好券清单API【导购】
+    public function couponGet($input)
+    {
+        $req = new \TbkDgItemCouponGetRequest;
+        $req->setAdzoneId(config('tbk.adzone_id'));
+        if (isset($input['platform'])){
+            $req->setPlatform($input['platform']);
+        }
+        if (isset($input['cat'])){
+            $req->setCat($input['cat']);
+        }
+        if (isset($input['keyword'])){
+            $req->setQ($input['keyword']);
+        }
+        $req->setPageSize($input['limit']);
+        $req->setPageNo($input['page']);
+        $resp = $this->client->execute($req);
+        return $resp->results->tbk_coupon??[];
+    }
     //阿里妈妈推广券信息查询
     //淘宝客淘口令
     //淘客媒体内容输出
