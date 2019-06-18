@@ -1,0 +1,44 @@
+/*页面page*/
+body {
+    min-width: 320px;
+    margin:auto;
+    font-family: 'Microsoft Yahei', Arial, Helvetica, sans-serif;
+    font-size:0.12rem;
+    line-height: 150%;
+    background:#faf9f9;
+}
+.main{
+}
+li{
+    float:left;
+    width:50%;
+    margin:0.2rem 0;
+}
+li .list{
+    margin: 0 0.4rem; 
+    background:#fff;
+    border-radius: 0.2rem;
+    overflow: hidden;
+}
+.list .name{
+    font-size:0.32rem;
+    color:#000;
+    padding:0.13rem 0.13rem 0 0.9rem;
+    height:1.5rem;
+    background:url('../img/icon1.jpg') 0.1rem 0.15rem no-repeat;
+    background-size:0.73rem 0.36rem;
+    overflow: hidden;
+}
+.list .price{
+    padding:0.13rem 0.13rem 0.13rem 1.1rem;
+    font-size:0.32rem;
+    color:#ff415a;
+    font-weight: bold;
+    background:url('../img/icon2.jpg') 0.1rem 0.15rem no-repeat;
+    background-size:0.94rem 0.37rem;
+}
+.list .price s, .list .price span{
+    color:#bbbbbb;
+    font-size:0.1rem;
+    font-weight: normal;
+}

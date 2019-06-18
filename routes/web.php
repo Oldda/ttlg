@@ -17,3 +17,6 @@ Route::get('/', function () {
 Route::get('navigation',function(){
 	return view('navigation');
 });
+Route::get('download',function(){
+	return view('download');
+});
