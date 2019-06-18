@@ -81,7 +81,7 @@ class IndexController extends Controller
         $input = [
             'limit' => request('limit',$this->limit),
             'page'  => request('page',$this->page),
-			'sort'  => 'total_sales_desc',
+//			'sort'  => 'total_sales_desc',
 			'has_coupon' => 'true',
 			'is_tmall' => 'true',
 			'need_free_shipment' => 'true',
