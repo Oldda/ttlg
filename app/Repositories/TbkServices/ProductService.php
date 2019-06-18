@@ -334,6 +334,9 @@ class ProductService
         if (isset($input['page'])){
             $req->setPageNo($input['page']);
         }
+        if (isset($input['material_id'])){
+            $req->setMaterialId($input['material_id']);
+        }
         if (isset($input['has_coupon'])){
             $req->setHasCoupon($input['has_coupon']);
         }else{
