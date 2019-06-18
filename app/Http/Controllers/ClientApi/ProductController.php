@@ -227,13 +227,14 @@ class ProductController extends Controller
      */
     public function show()
     {
-        $item_id = request('item_id','');
-        $coupon_id = request('coupon_id','');
-        if (empty($item_id) || empty($coupon_id)){
+        $input = request()->all();
+        $input['item_id'] = request('item_id','');
+        $input['coupon_id'] = request('coupon_id','');
+        if (empty($input['item_id']) || empty( $input['coupon_id'])){
             return ApiReturn::handle('PARAMETER_LOST');
         }
-        $data = $this->productService->show($item_id);
-        $data->coupon = $this->productService->coupon($item_id,$coupon_id);
+        $data = $this->productService->show($input);
+        $data->coupon = $this->productService->coupon($input);
         return ApiReturn::handle('SUCCESS',$data);
     }
 }

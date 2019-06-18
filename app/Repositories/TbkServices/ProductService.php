@@ -18,18 +18,182 @@ class ProductService
         $this->client->format = $this->format;
     }
     //淘宝客商品查询
-    public function itemGet()
+    public function itemGet($input)
     {
-        return 1;
+        $req = new \TbkItemGetRequest;
+        $req->setFields("num_iid,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url,seller_id,volume,nick");
+        if (isset($input['keyword'])){
+            $req->setQ($input['keyword']);
+        }
+        if (isset($input['platform'])){
+            $req->setPlatform($input['platform']);
+        }
+        if (isset($input['cat'])){
+            $req->setCat($input['cat']);
+        }
+        if (isset($input['itemloc'])){
+            $req->setItemloc($input['itemloc']);
+        }
+        if (isset($input['sort'])){
+            $req->setSort($input['sort']);
+        }
+        if (isset($input['is_tmall'])){
+            $req->setIsTmall($input['is_tmall']);
+        }
+        if (isset($input['is_overseas'])){
+            $req->setIsOverseas($input['is_overseas']);
+        }
+        if (isset($input['start_price'])){
+            $req->setStartPrice($input['start_price']);
+        }
+        if (isset($input['end_price'])){
+            $req->setEndPrice($input['end_price']);
+        }
+        if (isset($input['start_tk_rate'])){
+            $req->setStartTkRate($input['start_tk_rate']);
+        }
+        if (isset($input['end_tk_rate'])){
+            $req->setEndTkRate($input['end_tk_rate']);
+        }
+        $req->setPageNo($input['limit']);
+        $req->setPageSize($input['page']);
+        $resp = $this->client->execute($req);
+        return $resp->results->n_tbk_item[0]??$resp;
     }
     // 淘宝客商品关联推荐查询
+    public function recommendGet($input)
+    {
+        $req = new \TbkItemRecommendGetRequest;
+        $req->setFields("num_iid,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url");
+        $req->setNumIid($input['num_iid']);
+        $req->setCount($input['limit']);
+        if (isset($input['platform'])){
+            $req->setPlatform($input['platform']);
+        }
+        $resp = $this->client->execute($req);
+        return $resp->results->n_tbk_item??[];
+    }
     //淘宝客商品详情（简版）
+    public function show($input)
+    {
+        $req = new \TbkItemInfoGetRequest;
+        $req->setNumIids($input['item_id']);
+        if (isset($input['platform'])){
+            $req->setPlatform($input['platform']);
+        }
+        if (isset($input['ip'])){
+            $req->setIp($input['ip']);
+        }else{
+            $req->setIp($_SERVER['REMOTE_ADDR']);
+        }
+
+        $resp = $this->client->execute($req);
+        return $resp->results->n_tbk_item[0]??new \stdClass();
+    }
     //淘宝客店铺查询
+    public function shopGet($input)
+    {
+        $req = new \TbkShopGetRequest;
+        $req->setFields("user_id,shop_title,shop_type,seller_nick,pict_url,shop_url");
+        $req->setQ($input['keyword']);
+        $req->setPageNo($input['page']);
+        $req->setPageSize($input['limit']);
+        if (isset($input['sort'])){
+            $req->setSort($input['sort']);
+        }
+        if (isset($input['platform'])){
+            $req->setPlatform($input['platform']);
+        }
+        if (isset($input['is_tmall'])){
+            $req->setIsTmall($input['is_tmall']);
+        }
+        if (isset($input['start_credit'])){
+            $req->setStartCredit($input['start_credit']);
+        }
+        if (isset($input['end_credit'])){
+            $req->setEndCredit($input['end_credit']);
+        }
+        if (isset($input['start_commission_rate'])){
+            $req->setStartCommissionRate($input['start_commission_rate']);
+        }
+        if (isset($input['end_commission_rate'])){
+            $req->setEndCommissionRate($input['end_commission_rate']);
+        }
+        if (isset($input['start_total_action'])){
+            $req->setStartTotalAction($input['start_total_action']);
+        }
+        if (isset($input['end_total_action'])){
+            $req->setEndTotalAction($input['end_total_action']);
+        }
+        if (isset($input['start_auction_count'])){
+            $req->setStartAuctionCount($input['start_auction_count']);
+        }
+        if (isset($input['end_auction_count'])){
+            $req->setEndAuctionCount($input['end_auction_count']);
+        }
+        $resp = $this->client->execute($req);
+        return $resp->results->n_tbk_shop??[];
+    }
     // 淘宝客店铺关联推荐查询
+    public function shopRecommendGet($input)
+    {
+        $req = new \TbkShopRecommendGetRequest;
+        $req->setFields("user_id,shop_title,shop_type,seller_nick,pict_url,shop_url");
+        $req->setUserId($input['user_id']);
+        $req->setCount($input['limit']);
+        if (isset($input['platform'])){
+            $req->setPlatform($input['platform']);
+        }
+        $resp = $this->client->execute($req);
+        return $resp->results->n_tbk_shop??[];
+    }
     //获取淘宝联盟选品库的宝贝信息
+    public function favoritesItemGet($input)
+    {
+        $req = new \TbkUatmFavoritesItemGetRequest;
+        if (isset($input['platform'])){
+            $req->setPlatform($input['platform']);
+        }
+        $req->setPageSize($input['limit']);
+        $req->setAdzoneId(config('tbk.adzone_id'));
+        if (isset($input['unid'])){
+            $req->setUnid($input['unid']);
+        }
+        $req->setFavoritesId($input['favorites_id']);
+        $req->setPageNo($input['page']);
+        $req->setFields("num_iid,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url,seller_id,volume,nick,shop_title,zk_final_price_wap,event_start_time,event_end_time,tk_rate,status,type");
+        $resp = $this->client->execute($req);
+        return $resp->results->uatm_tbk_item??[];
+    }
     //获取淘宝联盟选品库列表
+    public function uatmFavoritesGet($input)
+    {
+        $req = new \TbkUatmFavoritesGetRequest;
+        $req->setPageNo($input['page']);
+        $req->setPageSize($input['limit']);
+        $req->setFields("favorites_title,favorites_id,type");
+        $req->setType($input['type']);
+        $resp = $this->client->execute($req);
+        return $resp->results->tbk_favorites??[];
+    }
     // 淘抢购api
-    //链接解析api
+    public function juTqgGet($input)
+    {
+        $req = new \TbkJuTqgGetRequest;
+        $req->setAdzoneId(config('tbk.adzone_id'));
+        $req->setFields("click_url,pic_url,reserve_price,zk_final_price,total_amount,sold_num,title,category_name,start_time,end_time");
+        $req->setStartTime($input['start_time']);
+        $req->setEndTime($input['end_time']);
+        $req->setPageNo($input['page']);
+        $req->setPageSize($input['limit']);
+        $resp = $this->client->execute($req);
+        return $resp->results->results??[];
+    }
+    //淘宝客商品猜你喜欢
+    public function itemGuessLike($input)
+    {
+        return '暂未开放！';
+    }
     //淘宝客商品猜你喜欢
     //好券清单API【导购】
     public function couponGet($input)
@@ -94,18 +258,6 @@ class ProductService
     //淘宝联盟官方活动推广API-工具
     //处罚订单查询 -导购-私域用户管理专用
     //导购淘礼金实例维度报表
-
-    //淘宝客物料下行-导购
-    public function list($limit=8,$page=1)
-    {
-        $req = new \TbkDgOptimusMaterialRequest;
-        $req->setPageSize($limit);
-        $req->setAdzoneId(config('tbk.adzone_id'));
-        $req->setPageNo($page);
-        $req->setMaterialId('3756');
-        $resp = $this->client->execute($req);
-        return $resp->result_list->map_data??[];
-    }
 
     //通用物料搜索API（导购）
     public function search($input)
@@ -184,24 +336,13 @@ class ProductService
         return $resp->result_list->map_data??[];
     }
 
-    //淘宝客商品详情（简版）
-    public function show($item_id)
-    {
-        $req = new \TbkItemInfoGetRequest;
-        $req->setNumIids($item_id);
-        $req->setPlatform("2");
-        $req->setIp($_SERVER['REMOTE_ADDR']);
-        $resp = $this->client->execute($req);
-        return $resp->results->n_tbk_item[0]??new \stdClass();
-    }
-
     //阿里妈妈推广券信息查询
-    public function coupon($item_id,$coupon_id)
+    public function coupon($input)
     {
         $req = new \TbkCouponGetRequest;
 //        $req->setMe("nfr%2BYTo2k1PX18gaNN%2BIPkIG2PadNYbBnwEsv6mRavWieOoOE3L9OdmbDSSyHbGxBAXjHpLKvZbL1320ML%2BCF5FRtW7N7yJ056Lgym4X01A%3D");
-        $req->setItemId($item_id); //商品id
-        $req->setActivityId($coupon_id);
+        $req->setItemId($input['item_id']); //商品id
+        $req->setActivityId($input['coupon_id']);
         $resp = $this->client->execute($req);
         return $resp->data??new \stdClass();
     }

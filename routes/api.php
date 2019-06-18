@@ -25,8 +25,28 @@ Route::group(['namespace'=>'ClientApi'],function (){
     /**
      * 淘宝客系列api数据返回
      */
-
+    //淘宝客商品查询
     Route::get('item_get','TbkController@itemGet');
+    //淘宝客商品关联推荐查询
+    Route::get('recommend_get','TbkController@recommendGet');
+    //
+    Route::get('item_info_get','TbkController@itemInfoGet');
+    //淘宝客店铺查询
+    Route::get('shop_get','TbkController@shopGet');
+    //淘宝客店铺关联推荐查询
+    Route::get('shop_recommend_get','TbkController@shopRecommendGet');
+    //获取淘宝联盟选品库的宝贝信息
+    Route::get('favorites_item_get','TbkController@favoritesItemGet');
+    //获取淘宝联盟选品库列表
+    Route::get('uatm_favorites_get','TbkController@uatmFavoritesGet');
+    //淘抢购Api
+    Route::get('ju_tqg_get','TbkController@juTqgGet');
+    //淘宝客商品猜你喜欢
+    Route::get('item_guess_like','TbkController@itemGuessLike');
+
+
+
+
     //好券清单API【导购】
     Route::get('coupon_get','TbkController@couponGet');
     //淘宝客物料下行-导购
