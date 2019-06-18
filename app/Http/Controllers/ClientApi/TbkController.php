@@ -523,11 +523,11 @@ class TbkController extends Controller
 
     /**
      * @SWG\Get(
-     *     path="/uatm_favorites_get",
-     *     summary="获取淘宝联盟选品库列表",
+     *     path="/ju_tqg_get",
+     *     summary="淘抢购api ",
      *     tags={"淘宝客相关接口"},
-     *     description="获取淘宝联盟选品库列表",
-     *     operationId="uatm_favorites_get",
+     *     description="淘抢购api ",
+     *     operationId="ju_tqg_get",
      *     produces={"application/json"},
      *     @SWG\Parameter(
      *         name="start_time",
