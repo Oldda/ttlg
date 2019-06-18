@@ -21,6 +21,9 @@ Route::group(['namespace'=>'ClientApi'],function (){
         $count = $resp->total_results??'可能没有该分类，获取数量失败';
         echo $count;
     });
+
+    //淘宝客系列api数据返回
+    Route::get('item_get','TbkController@itemGet');
     /**
      * 商品路由
      */

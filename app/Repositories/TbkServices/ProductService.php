@@ -18,7 +18,10 @@ class ProductService
         $this->client->format = $this->format;
     }
     //淘宝客商品查询
-
+    public function itemGet()
+    {
+        return 1;
+    }
     // 淘宝客商品关联推荐查询
     //淘宝客商品详情（简版）
     //淘宝客店铺查询
