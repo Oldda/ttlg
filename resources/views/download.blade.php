@@ -1,5 +1,14 @@
 <!DOCTYPE html>
 <html>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?ed37aa0def56eb5a89ba3cf187f34623";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
 <head>
     <meta charset="utf-8">
     <title>省钱大作战-618</title>
