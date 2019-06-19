@@ -2,6 +2,7 @@
 //天天乐购app路由
 Route::group(['namespace'=>'ClientApi'],function (){
     Route::get('/index','IndexController@index'); //首页
+    Route::get('/list','IndexController@list'); //首页2
     Route::get('/theme','IndexController@theme'); //主题页
     Route::get('/guide','IndexController@guideImg'); //引导图
     Route::get('/start_img','IndexController@startImg'); //启动图
@@ -29,7 +30,7 @@ Route::group(['namespace'=>'ClientApi'],function (){
     Route::get('item_get','TbkController@itemGet');
     //淘宝客商品关联推荐查询
     Route::get('recommend_get','TbkController@recommendGet');
-    //
+    //淘宝客商品详情（简版）
     Route::get('item_info_get','TbkController@itemInfoGet');
     //淘宝客店铺查询
     Route::get('shop_get','TbkController@shopGet');

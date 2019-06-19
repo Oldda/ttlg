@@ -780,9 +780,6 @@ class TbkController extends Controller
     public function tbkCouponGet()
     {
         $input = request()->all();
-        if (!isset($input['item_id']) || !isset($input['activity_id'])){
-            return ApiReturn::handle('PARAMETER_LOST');
-        }
         return ApiReturn::handle('SUCCESS',$this->tbkApi->coupon($input));
     }
     //未完待续

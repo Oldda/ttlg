@@ -217,9 +217,15 @@ class ProductService
     public function coupon($input)
     {
         $req = new \TbkCouponGetRequest;
-//        $req->setMe("nfr%2BYTo2k1PX18gaNN%2BIPkIG2PadNYbBnwEsv6mRavWieOoOE3L9OdmbDSSyHbGxBAXjHpLKvZbL1320ML%2BCF5FRtW7N7yJ056Lgym4X01A%3D");
-        $req->setItemId($input['item_id']); //商品id
-        $req->setActivityId($input['coupon_id']);
+        if(isset($input['me'])){
+            $req->setMe($input['me']);
+        }
+        if (isset($input['item_id'])){
+            $req->setItemId($input['item_id']); //商品id
+        }
+        if (isset($input['activity_id'])){
+            $req->setActivityId($input['activity_id']);
+        }
         $resp = $this->client->execute($req);
         return $resp->data??new \stdClass();
     }

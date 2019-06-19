@@ -101,7 +101,63 @@ class IndexController extends Controller
         $data['productList'] = $this->productService->search($input);
         return ApiReturn::handle('SUCCESS',$data,$input['limit'],$input['page']);
     }
-
+    /**
+     * @SWG\Get(
+     *     path="/list",
+     *     summary="app首页整合数据 material版",
+     *     tags={"首页相关接口"},
+     *     description="app首页整合数据 material版",
+     *     operationId="list",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="limit",
+     *         in="path",
+     *         description="每页显示的条数,默认8条",
+     *         required=false,
+     *         type="integer",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="page",
+     *         in="path",
+     *         description="页码，默认为第1页",
+     *         required=false,
+     *         type="integer",
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="SUCCESS"
+     *     ),
+     *     @SWG\Response(
+     *         response=422,
+     *         description="详见错误附件",
+     *     )
+     * )
+     */
+    public function list()
+    {
+        $input = [
+            'limit' => request('limit',$this->limit),
+            'page'  => request('page',$this->page),
+            'sort'  => 'total_sales_desc',
+            'has_coupon' => 'true',
+            'is_tmall' => 'true',
+            'need_free_shipment' => 'true',
+            'need_prepay' => 'true',
+            'include_pay_rate_30' => 'true',
+            'include_good_rate' => 'true',
+            'start_price' => '9',
+            'end_price' => '100',
+            'cat' => '16,30,50008165,1801,21,50002766,50006843,50010788,50011740,35',
+            'npx_level' => 2,
+            'material_id' => 3756
+        ];
+        $data = array();
+        $data['cat'] = $this->catService->list(); //分类
+        $data['banner'] = $this->bannerService->list('index'); //banner图
+        $data['channel'] = $this->channelService->list('index');//频道
+        $data['productList'] = $this->productService->search($input);
+        return ApiReturn::handle('SUCCESS',$data,$input['limit'],$input['page']);
+    }
     /**
      * @SWG\Get(
      *     path="/theme",

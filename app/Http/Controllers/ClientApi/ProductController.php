@@ -229,7 +229,7 @@ class ProductController extends Controller
     {
         $input = request()->all();
         $input['item_id'] = request('item_id','');
-        $input['coupon_id'] = request('coupon_id','');
+        $input['activity_id'] = request('coupon_id','');
         if (empty($input['item_id']) || empty( $input['coupon_id'])){
             return ApiReturn::handle('PARAMETER_LOST');
         }
