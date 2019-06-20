@@ -14,19 +14,25 @@ class UserBrowseEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $user_id;
-    public $user_id2;
-    public $user_id3;
+    public $imei;
+    public $browse_page;
+    public $browse_info;
+    public $request_url;
+    public $operating_system;
+    public $phone_type;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Int $user_id,Int $id2,Int $id3)
+    public function __construct($imei,$browse_page,$browse_info,$request_url,$operating_system,$phone_type)
     {
-        $this->user_id = $user_id;
-        $this->user_id2 = $id2;
-        $this->user_id3 = $id3;
+        $this->imei = $imei;
+        $this->browse_page = $browse_page;
+        $this->browse_info = $browse_info;
+        $this->request_url = $request_url;
+        $this->operating_system = $operating_system;
+        $this->phone_type = $phone_type;
     }
 
     /**
