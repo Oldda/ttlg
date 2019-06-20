@@ -8,6 +8,8 @@ class Statistic extends Model
 {
     protected $table = 'statistics';
 
+    public $timestamps = false;
+
     protected $guarded = [
 
     ];
