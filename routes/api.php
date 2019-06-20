@@ -1,4 +1,6 @@
 <?php
+//测试
+Route::get('test','TestController@test');
 //天天乐购app路由
 Route::group(['namespace'=>'ClientApi'],function (){
     Route::get('/index','IndexController@index'); //首页
