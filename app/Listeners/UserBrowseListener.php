@@ -27,6 +27,7 @@ class UserBrowseListener implements ShouldQueue
     public function handle(UserBrowseEvent $event)
     {
         //存储浏览日志
-        dd($event->user_id2);
+        echo $event->user_id2;
+        return true;
     }
 }
