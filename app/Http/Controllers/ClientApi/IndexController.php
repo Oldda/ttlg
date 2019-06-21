@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ClientApi;
 
+use App\Events\UserBrowseEvent;
 use App\Facades\ApiReturn;
 use App\Models\Guide;
 use App\Models\StartImg;
@@ -110,6 +111,27 @@ class IndexController extends Controller
      *     operationId="list",
      *     produces={"application/json"},
      *     @SWG\Parameter(
+     *         name="imei",
+     *         in="header",
+     *         description="每页显示的条数,默认8条",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="operating_system",
+     *         in="header",
+     *         description="操作系统",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="phone_type",
+     *         in="header",
+     *         description="机型-型号",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
      *         name="limit",
      *         in="path",
      *         description="每页显示的条数,默认8条",
@@ -156,6 +178,14 @@ class IndexController extends Controller
         $data['banner'] = $this->bannerService->list('index'); //banner图
         $data['channel'] = $this->channelService->list('index');//频道
         $data['productList'] = $this->productService->search($input);
+        event(new UserBrowseEvent(
+            request()->header('imei',''),
+            '首页',
+            '无',
+            request()->url(),
+            request()->header('operating_system',''),
+            request()->header('phone_type','')
+        ));
         return ApiReturn::handle('SUCCESS',$data,$input['limit'],$input['page']);
     }
     /**
@@ -166,6 +196,27 @@ class IndexController extends Controller
      *     description="活动，主题页面数据",
      *     operationId="theme_index",
      *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="imei",
+     *         in="header",
+     *         description="每页显示的条数,默认8条",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="operating_system",
+     *         in="header",
+     *         description="操作系统",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="phone_type",
+     *         in="header",
+     *         description="机型-型号",
+     *         required=false,
+     *         type="string",
+     *     ),
      *     @SWG\Parameter(
      *         name="theme_id",
      *         in="path",
@@ -214,6 +265,14 @@ class IndexController extends Controller
             'channel' => $this->channelService->list($theme->channel_position_keyword)??[],
             'productList' => $this->productService->search($json)
         );
+        event(new UserBrowseEvent(
+            request()->header('imei',''),
+            '主题页',
+            $theme->title,
+            request()->url(),
+            request()->header('operating_system',''),
+            request()->header('phone_type','')
+        ));
         return ApiReturn::handle('SUCCESS',$data,$json['limit'],$json['page']);
     }
 

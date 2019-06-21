@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ClientApi;
 
+use App\Events\UserBrowseEvent;
 use App\Facades\ApiReturn;
 use App\Repositories\TbkServices\ProductService;
 use Illuminate\Http\Request;
@@ -27,6 +28,27 @@ class ProductController extends Controller
      *     description="搜索产品",
      *     operationId="account_index",
      *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="imei",
+     *         in="header",
+     *         description="每页显示的条数,默认8条",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="operating_system",
+     *         in="header",
+     *         description="操作系统",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="phone_type",
+     *         in="header",
+     *         description="机型-型号",
+     *         required=false,
+     *         type="string",
+     *     ),
      *     @SWG\Parameter(
      *         name="start_dsr",
      *         in="path",
@@ -190,6 +212,26 @@ class ProductController extends Controller
         $input['limit'] = request('limit',$this->limit);
         $input['page'] = request('page',$this->page);
         $data = $this->productService->search($input);
+        if (isset($input['cat'])){
+            event(new UserBrowseEvent(
+                request()->header('imei',''),
+                '分类页',
+                \request('cat',''),
+                request()->url(),
+                request()->header('operating_system',''),
+                request()->header('phone_type','')
+            ));
+        }
+        if (isset($input['keyword'])){
+            event(new UserBrowseEvent(
+                request()->header('imei',''),
+                '搜索页',
+                \request('keyword',''),
+                request()->url(),
+                request()->header('operating_system',''),
+                request()->header('phone_type','')
+            ));
+        }
         return ApiReturn::handle('SUCCESS',$data,$input['limit'],$input['page']);
     }
 
@@ -235,6 +277,14 @@ class ProductController extends Controller
         }
         $data = $this->productService->show($input);
         $data->coupon = $this->productService->coupon($input);
+        event(new UserBrowseEvent(
+            request()->header('imei',''),
+            '详情页',
+            $data->num_iid.'_'.$data->title,
+            request()->url(),
+            request()->header('operating_system',''),
+            request()->header('phone_type','')
+        ));
         return ApiReturn::handle('SUCCESS',$data);
     }
 }
