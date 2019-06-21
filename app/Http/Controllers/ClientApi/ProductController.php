@@ -31,7 +31,7 @@ class ProductController extends Controller
      *     @SWG\Parameter(
      *         name="imei",
      *         in="header",
-     *         description="每页显示的条数,默认8条",
+     *         description="设备号",
      *         required=false,
      *         type="string",
      *     ),
@@ -243,6 +243,27 @@ class ProductController extends Controller
      *     description="商品详情",
      *     operationId="account_index",
      *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="imei",
+     *         in="header",
+     *         description="设备号",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="operating_system",
+     *         in="header",
+     *         description="操作系统",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="phone_type",
+     *         in="header",
+     *         description="机型-型号",
+     *         required=false,
+     *         type="string",
+     *     ),
      *     @SWG\Parameter(
      *         name="item_id",
      *         in="path",

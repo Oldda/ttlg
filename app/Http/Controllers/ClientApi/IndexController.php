@@ -113,7 +113,7 @@ class IndexController extends Controller
      *     @SWG\Parameter(
      *         name="imei",
      *         in="header",
-     *         description="每页显示的条数,默认8条",
+     *         description="设备号",
      *         required=false,
      *         type="string",
      *     ),
@@ -199,7 +199,7 @@ class IndexController extends Controller
      *     @SWG\Parameter(
      *         name="imei",
      *         in="header",
-     *         description="每页显示的条数,默认8条",
+     *         description="设备号",
      *         required=false,
      *         type="string",
      *     ),
