@@ -230,6 +230,24 @@ class ProductService
         return $resp->data??new \stdClass();
     }
     //淘宝客淘口令
+    public function tpwdCreate($input)
+    {
+        $req = new \TbkTpwdCreateRequest;
+        if (isset($input['user_id'])){
+            $req->setUserId($input['user_id']);
+        }
+
+        $req->setText($input['text']);
+        $req->setUrl($input['url']);
+        if (isset($input['logo'])){
+            $req->setLogo($input['logo']);
+        }
+        if (isset($input['ext'])){
+            $req->setExt($input['ext']);
+        }
+        $resp = $this->client->execute($req);
+        return $resp->data??new \stdClass();
+    }
     //淘客媒体内容输出
     //淘宝客新用户订单API--导购
     //淘宝客新用户订单API--社交
@@ -262,17 +280,6 @@ class ProductService
         $resp = $this->client->execute($req);
         return $resp->result_list->map_data??[];
     }
-    // 通用物料搜索API（导购）
-    // 拉新活动汇总API--导购
-    //拉新活动汇总API--社交
-    //淘客媒体内容效果输出
-    //淘宝客擎天柱通用物料API - 社交
-    //淘礼金创建
-    //淘宝联盟官方活动推广API-媒体
-    //淘宝联盟官方活动推广API-工具
-    //处罚订单查询 -导购-私域用户管理专用
-    //导购淘礼金实例维度报表
-
     //通用物料搜索API（导购）
     public function search($input)
     {
@@ -346,10 +353,46 @@ class ProductService
         if (isset($input['has_coupon'])){
             $req->setHasCoupon($input['has_coupon']);
         }else{
-			$req->setHasCoupon('true');
-		}
+            $req->setHasCoupon('true');
+        }
         $req->setAdzoneId(config('tbk.adzone_id'));
         $resp = $this->client->execute($req);
         return $resp->result_list->map_data??[];
+    }
+
+    // 拉新活动汇总API--导购
+    //拉新活动汇总API--社交
+    //淘客媒体内容效果输出
+    //淘宝客擎天柱通用物料API - 社交
+    //淘礼金创建
+    //淘宝联盟官方活动推广API-媒体
+    //淘宝联盟官方活动推广API-工具
+    //处罚订单查询 -导购-私域用户管理专用
+    //导购淘礼金实例维度报表
+    
+    //补充接口淘宝产品详情
+    public function getDetail($item_id)
+    {
+        $url = "http://h5api.m.taobao.com/h5/mtop.taobao.detail.getdetail/6.0/?data=%7B%22itemNumId%22%3A%22".$item_id."%22%7D";
+        $data = $this->curlGet($url);
+        if (empty($data) || is_null($data)){
+            return new \stdClass();
+        }
+        return $data['data'];
+    }
+
+    private function curlGet($url)
+    {
+        $headerArray =array("Content-type:application/json;","Accept:application/json");
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch,CURLOPT_HTTPHEADER,$headerArray);
+        $output = curl_exec($ch);
+        curl_close($ch);
+        $output = json_decode($output,true);
+        return $output;
     }
 }

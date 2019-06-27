@@ -50,10 +50,16 @@ Route::group(['namespace'=>'ClientApi'],function (){
     Route::get('coupon_get','TbkController@couponGet');
     //阿里妈妈推广券信息查询
     Route::get('tbk_coupon_get','TbkController@tbkCouponGet');
-
-
+    //淘宝客淘口令
+    Route::get('tpwd_create','TbkController@tpwdCreate');
     //淘宝客物料下行-导购
     Route::get('optimus_material','TbkController@optimusMaterial');
+    //通用物料搜索API（导购）
+    Route::get('material_optional','TbkController@materialOptional');
+    //补充接口获取淘宝商品的详细信息
+    Route::get('product_detail','TbkController@getDetail');
+
+
     /**
      * 商品路由
      */
