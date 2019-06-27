@@ -378,7 +378,7 @@ class ProductService
         if (empty($data) || is_null($data)){
             return new \stdClass();
         }
-        return $data['data'];
+        return $data['data']??new \stdClass();
     }
 
     private function curlGet($url)

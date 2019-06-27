@@ -271,13 +271,6 @@ class ProductController extends Controller
      *         required=true,
      *         type="string",
      *     ),
-     *     @SWG\Parameter(
-     *        name="coupon_id",
-     *         in="path",
-     *         description="优惠券id",
-     *         required=true,
-     *         type="string",
-     *     ),
      *     @SWG\Response(
      *         response=200,
      *         description="SUCCESS"
@@ -292,16 +285,15 @@ class ProductController extends Controller
     {
         $input = request()->all();
         $input['item_id'] = request('item_id','');
-        $input['activity_id'] = request('coupon_id','');
-        if (empty($input['item_id']) || empty( $input['coupon_id'])){
+        if (empty($input['item_id'])){
             return ApiReturn::handle('PARAMETER_LOST');
         }
-        $data = $this->productService->show($input);
-        $data->coupon = $this->productService->coupon($input);
+        $data = $this->productService->getDetail($input['item_id']);
+        $data['base'] = $this->productService->show($input);
         event(new UserBrowseEvent(
             request()->header('imei',''),
             '详情页',
-            $data->num_iid.'_'.$data->title,
+            $data['base']->num_iid.'_'.$data['base']->title,
             request()->url(),
             request()->header('operating_system',''),
             request()->header('phone_type','')
