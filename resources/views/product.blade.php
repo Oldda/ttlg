@@ -28,7 +28,7 @@
         coupon_start_time:{{$coupon->coupon_start_time}}
         coupon_end_time:{{$coupon->coupon_end_time}}
         coupon_get_url:{{$coupon->coupon_share_url}}
-        <a href="{{$coupon->coupon_share_url}}">立即领券</a>
+        <a href="{{(strpos($coupon->coupon_share_url,'http') !== false) ? $coupon->coupon_share_url : 'https://'.$coupon->coupon_share_url}}">立即领券</a>
 
         @foreach($pics as $data)
             @if(isset($data['params']['picUrl']))

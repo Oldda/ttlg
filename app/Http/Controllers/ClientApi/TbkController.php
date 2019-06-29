@@ -1188,7 +1188,12 @@ class TbkController extends Controller
             return ApiReturn::handle('COUPON_GET_ERROR');
         }
         $coupon->coupon_share_url = $input['coupon_share_url'];
-        $pics = json_decode(file_get_contents($product['item']['moduleDescUrl']),true)['data']['children'];
+        try{
+            $pics = json_decode(file_get_contents($product['item']['moduleDescUrl']),true)['data']['children'];
+        }catch (\Exception $exception){
+            $pics = [];
+        }
+
         return view('product',compact('pics','apk','product','coupon'));
         return ApiReturn::handle('SUCCESS',compact('apk','product','coupon'));
     }
