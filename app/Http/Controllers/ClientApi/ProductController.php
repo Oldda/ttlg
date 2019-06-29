@@ -303,7 +303,7 @@ class ProductController extends Controller
 
     /**
      * @SWG\Get(
-     *     path="/get_coupon_from_item,
+     *     path="/get_coupon_from_item",
      *     summary="通过商品id搜券的信息和商品信息",
      *     tags={"商品相关接口"},
      *     description="通过商品id搜券的信息和商品信息",
