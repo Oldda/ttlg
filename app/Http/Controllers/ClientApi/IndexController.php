@@ -8,6 +8,7 @@ use App\Models\Guide;
 use App\Models\StartImg;
 use App\Models\Theme;
 use App\Models\WebVariable;
+use App\Repositories\SMSService;
 use App\Repositories\TbkServices\BannerService;
 use App\Repositories\TbkServices\CatService;
 use App\Repositories\TbkServices\ChannelService;
@@ -20,15 +21,17 @@ class IndexController extends Controller
     private $catService;
     private $channelService;
     private $productService;
+    private $sms;
     private $limit = 8;
     private $page = 1;
-    public function __construct(CatService $catService, BannerService $bannerService, ChannelService $channelService, ProductService $productService)
+    public function __construct(CatService $catService, BannerService $bannerService, ChannelService $channelService, ProductService $productService,SMSService $sms)
     {
         parent::__construct();
         $this->catService = $catService;
         $this->bannerService = $bannerService;
         $this->channelService = $channelService;
         $this->productService = $productService;
+        $this->sms = $sms;
     }
 
     /**
@@ -98,7 +101,7 @@ class IndexController extends Controller
         $data = array();
         $data['cat'] = $this->catService->list(); //分类
         $data['banner'] = $this->bannerService->list('index'); //banner图
-        $data['channel'] = $this->channelService->list('index');//频道
+        $data['channel'] = $this->channelService->list('index',1);//频道
         $data['productList'] = $this->productService->search($input);
         return ApiReturn::handle('SUCCESS',$data,$input['limit'],$input['page']);
     }
@@ -174,9 +177,11 @@ class IndexController extends Controller
             'material_id' => 3756
         ];
         $data = array();
-        $data['cat'] = $this->catService->list(); //分类
-        $data['banner'] = $this->bannerService->list('index'); //banner图
-        $data['channel'] = $this->channelService->list('index');//频道
+        //$data['cat'] = $this->catService->list(); //获取分类列表
+        $data['hot_recommend'] = $this->channelService->list('index',3);//获取热门推荐
+        $data['banner'] = $this->bannerService->list('index'); //获取轮播图列表
+        $data['king_kong'] = $this->channelService->list('index',2);//获取金刚展示位列表
+        $data['channel'] = $this->channelService->list('index',1);//获取频道主题列表
         $data['productList'] = $this->productService->search($input);
         event(new UserBrowseEvent(
             request()->header('imei',''),
@@ -262,7 +267,7 @@ class IndexController extends Controller
         }
         $data = array(
             'banner' => $this->bannerService->list($theme->banner_position_keyword)->first()??new \StdClass(), //banner图
-            'channel' => $this->channelService->list($theme->channel_position_keyword)??[],
+            'channel' => $this->channelService->list($theme->channel_position_keyword,1)??[],
             'productList' => $this->productService->search($json)
         );
         event(new UserBrowseEvent(
@@ -350,4 +355,40 @@ class IndexController extends Controller
 		 }
 		 return ApiReturn::handle('SUCCESS',$data);
 	 }
+    /**
+     * @SWG\Get(
+     *     path="/sms",
+     *     summary="发送短信",
+     *     tags={"首页相关接口"},
+     *     description="发送短信",
+     *     operationId="index_variables",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="login-token",
+     *         in="header",
+     *         description="登录token",
+     *         required=true,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="phone",
+     *         in="path",
+     *         description="要发送的手机号",
+     *         required=true,
+     *         type="string",
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="SUCCESS"
+     *     ),
+     *     @SWG\Response(
+     *         response=422,
+     *         description="详见错误附件",
+     *     )
+     * )
+     */
+    public function sms()
+    {
+        return $this->sms->sms(request('phone'));
+    }
 }

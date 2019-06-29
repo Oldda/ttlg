@@ -1184,6 +1184,9 @@ class TbkController extends Controller
         $product['base'] = $this->tbkApi->show($input);
         //获取券信息
         $coupon = $this->tbkApi->coupon($input);
+        if (!get_object_vars($coupon)){
+            return ApiReturn::handle('COUPON_GET_ERROR');
+        }
         $coupon->coupon_share_url = $input['coupon_share_url'];
         $pics = json_decode(file_get_contents($product['item']['moduleDescUrl']),true)['data']['children'];
         return view('product',compact('pics','apk','product','coupon'));

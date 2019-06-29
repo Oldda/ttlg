@@ -15,4 +15,13 @@ class Category extends Model
     protected $guarded = [
         'create_time','update_time'
     ];
+
+    public function childCategory() {
+        return $this->hasMany('App\Models\Category', 'parent_cid', 'id');
+    }
+
+    public function allChildrenCategorys()
+    {
+        return $this->childCategory()->with('allChildrenCategorys');
+    }
 }

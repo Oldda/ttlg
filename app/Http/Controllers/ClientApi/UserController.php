@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\ClientApi;
 
 use App\Facades\ApiReturn;
+use App\Http\Requests\UserBindPhonePost;
 use App\Http\Requests\UserLoginPost;
 use App\Models\LoginLog;
 use App\Models\User;
@@ -55,13 +56,47 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @SWG\Post(
+     *     path="/user/bind_phone",
+     *     summary="用户绑定手机号码",
+     *     tags={"用户相关接口"},
+     *     description="用户绑定手机号码",
+     *     operationId="user_phone_bind",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="login-token",
+     *         in="header",
+     *         description="登录状态token",
+     *         required=true,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="phone",
+     *         in="formData",
+     *         description="手机号码",
+     *         required=true,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="verify_code",
+     *         in="formData",
+     *         description="短信验证码",
+     *         required=true,
+     *         type="string",
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="SUCCESS"
+     *     ),
+     *     @SWG\Response(
+     *         response=422,
+     *         description="详见错误附件",
+     *     )
+     * )
      */
-    public function create()
+    public function bindPhone(UserBindPhonePost $request)
     {
-        //
+        return $this->userService->bindPhone($request);
     }
 
     /**

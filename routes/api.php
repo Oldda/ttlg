@@ -56,8 +56,6 @@ Route::group(['namespace'=>'ClientApi'],function (){
     Route::get('optimus_material','TbkController@optimusMaterial');
     //通用物料搜索API（导购）
     Route::get('material_optional','TbkController@materialOptional');
-    //补充接口获取淘宝商品的详细信息
-    Route::get('product_detail','TbkController@getDetail');
 
 
     /**
@@ -65,6 +63,7 @@ Route::group(['namespace'=>'ClientApi'],function (){
      */
     Route::get('/product/search','ProductController@search');
     Route::get('/product/show','ProductController@show');
+    Route::get('product_detail','TbkController@getDetail'); //h5页面商品详情
     /**
      * 用户路由
      */
@@ -72,12 +71,18 @@ Route::group(['namespace'=>'ClientApi'],function (){
     Route::post('/login','UserController@login');
 
     /**
+     * 分类路由
+     */
+    Route::get('cat_list','CateController@list'); //列表
+    /**
      * APK版本资源
      */
     Route::get('/apk','ApkController@getApk');
 });
 //登录中间件路由
 Route::group(['namespace'=>'ClientApi','middleware'=>'login'],function (){
-    Route::post('feedback','FeedbackController@store');
-    Route::get('logout','UserController@logout');
+    Route::post('feedback','FeedbackController@store');//添加反馈
+    Route::get('logout','UserController@logout');//登出
+    Route::post('user/bind_phone','UserController@bindPhone');//用户绑定手机号
+    Route::get('sms','IndexController@sms'); //发送短信
 });

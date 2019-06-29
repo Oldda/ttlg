@@ -5,9 +5,10 @@ use App\Facades\ApiReturn;
 use App\Models\LoginInfo;
 use App\Models\LoginLog;
 use App\Models\User;
+use App\Repositories\SMSService;
 use Illuminate\Support\Facades\DB;
 
-class UserService
+class UserService extends SMSService
 {
     public function login($request)
     {
@@ -23,7 +24,7 @@ class UserService
                         return ApiReturn::handle('PARAMETER_LOST');
                     }
 					$union = $request->union_auth_token??'';
-                    return $this->store([
+                    $user = $this->store([
                         'nickname' => $request->nickname,
                         'thumbnail'=> $request->thumbnail
                     ],[
@@ -31,13 +32,22 @@ class UserService
                         'auth_token' => $request->auth_token,
 						'union_auth_token' => $union
                     ]);
+                    if (!$user){
+                        return ApiReturn::handle('ADD_SOURCE_ERROR');
+                    }
                 }
                 break;
             case 2:
+                //todo...
                 break;
             default:
+                //todo...
                 return false;
                 break;
+        }
+        //是否绑定了手机号
+        if (!isset($user->phone) || $user->phone === null){
+            $user->phone_is_bind = false;
         }
         //初始化登录token
         $user->login_token = $this->generateToken($request,$user->id);
@@ -55,10 +65,10 @@ class UserService
             $loginInfo['user_id'] = $user->id;
             LoginInfo::create($loginInfo);
             DB::commit();
-            return ApiReturn::handle('SUCCESS',$user);
+            return $user;
         }catch (\Exception $exception){
             DB::rollBack();
-            return ApiReturn::handle('ADD_SOURCE_ERROR');
+            return false;
         }
     }
     
@@ -76,5 +86,20 @@ class UserService
         $data['token'] = encrypt(json_encode($data));
         LoginLog::create($data);
         return $data['token'];
+    }
+
+    //绑定手机号
+    public function bindPhone($request)
+    {
+        //验证手机验证码
+        $result = $this->check($request->phone,$request->sms_code);
+        if (json_decode($result->getContent(),true)['status'] !== true){
+            return $result;
+        }
+        //插入数据
+        $user = (new User())->find($this->user_id);
+        $user->phone = $request->phone;
+        $user->save();
+        return ApiReturn::handle('SUCCESS'.$user);
     }
 }
