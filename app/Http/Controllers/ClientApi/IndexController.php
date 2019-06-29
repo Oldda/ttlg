@@ -361,7 +361,7 @@ class IndexController extends Controller
      *     summary="发送短信",
      *     tags={"首页相关接口"},
      *     description="发送短信",
-     *     operationId="index_variables",
+     *     operationId="sms",
      *     produces={"application/json"},
      *     @SWG\Parameter(
      *         name="login-token",

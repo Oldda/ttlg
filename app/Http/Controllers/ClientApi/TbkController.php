@@ -941,7 +941,7 @@ class TbkController extends Controller
      * @SWG\Get(
      *     path="/material_optional",
      *     summary="搜索产品",
-     *     tags={"商品相关接口"},
+     *     tags={"淘宝客相关接口"},
      *     description="搜索产品",
      *     operationId="product_search_taobao",
      *     produces={"application/json"},
@@ -1135,9 +1135,9 @@ class TbkController extends Controller
     /**
      * @SWG\Get(
      *     path="/product_detail",
-     *     summary="补充接口获取淘宝商品的详细信息",
-     *     tags={"淘宝客相关接口"},
-     *     description="补充接口获取淘宝商品的详细信息",
+     *     summary="h5页面商品详细信息",
+     *     tags={"首页相关接口"},
+     *     description="h5页面商品详细信息",
      *     operationId="product_detail",
      *     produces={"application/json"},
      *     @SWG\Parameter(
