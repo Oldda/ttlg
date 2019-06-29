@@ -89,17 +89,17 @@ class UserService extends SMSService
     }
 
     //绑定手机号
-    public function bindPhone($request)
+    public function bindPhone($request,$user_id)
     {
         //验证手机验证码
-        $result = $this->check($request->phone,$request->sms_code);
+        $result = $this->check($request->phone,$request->verify_code);
         if (json_decode($result->getContent(),true)['status'] !== true){
             return $result;
         }
         //插入数据
-        $user = (new User())->find($this->user_id);
+        $user = (new User())->find($user_id);
         $user->phone = $request->phone;
         $user->save();
-        return ApiReturn::handle('SUCCESS'.$user);
+        return ApiReturn::handle('SUCCESS',$user);
     }
 }

@@ -79,7 +79,7 @@ return [
     'SMS_CODE_EXPIRED' => [
         'status' => false,
         'response_code' => 205,
-        'msg' => '验证码时效，请重发！'
+        'msg' => '验证码失效，请重发！'
     ],
     'SMS_HAS_BENN_USED' => [
         'status' => false,
@@ -97,6 +97,11 @@ return [
         'status' => false,
         'response_code' => 2001,
         'msg' => '券信息获取失败，请检查券id参数！'
+    ],
+    'COUPON_MISSING' => [
+        'status' => false,
+        'response_code' => 2002,
+        'msg' => '券信息未找到！'
     ],
     //用户相关
 

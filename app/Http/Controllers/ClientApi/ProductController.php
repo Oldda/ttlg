@@ -300,4 +300,54 @@ class ProductController extends Controller
         ));
         return ApiReturn::handle('SUCCESS',$data);
     }
+
+    /**
+     * @SWG\Get(
+     *     path="/get_coupon_from_item,
+     *     summary="通过商品id搜券的信息和商品信息",
+     *     tags={"商品相关接口"},
+     *     description="通过商品id搜券的信息和商品信息",
+     *     operationId="get_coupon_from_item",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="item_id",
+     *         in="path",
+     *         description="商品id",
+     *         required=true,
+     *         type="string",
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="SUCCESS"
+     *     ),
+     *     @SWG\Response(
+     *         response=422,
+     *         description="详见错误附件",
+     *     )
+     * )
+     */
+    public function getCouponFromItemId()
+    {
+        $item_id = request('item_id',null);
+        if ($item_id == null){
+            return ApiReturn::handel('PARAMETER_LOST');
+        }
+        //获取商品信息
+        $product = $this->productService->show(['item_id'=>$item_id]);
+        if (get_object_vars($product) === []){
+            return ApiReturn::handle('NOT_FOUND_ERROR');
+        }
+        //搜索物料
+        $detail = $this->productService->search([
+            'keyword' => $product->title
+        ]);
+        if ($detail != []){
+            foreach ($detail as $value){
+                if ($value->item_id == $item_id){
+                    return ApiReturn::handle('SUCCESS',$value);
+                }
+            }
+        }
+        return ApiReturn::handle('COUPON_MISSING');
+    }
 }

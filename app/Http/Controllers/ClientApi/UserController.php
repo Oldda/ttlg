@@ -96,7 +96,7 @@ class UserController extends Controller
      */
     public function bindPhone(UserBindPhonePost $request)
     {
-        return $this->userService->bindPhone($request);
+        return $this->userService->bindPhone($request,$this->user_id);
     }
 
     /**
