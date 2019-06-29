@@ -784,7 +784,6 @@ class TbkController extends Controller
         $input = request()->all();
         return ApiReturn::handle('SUCCESS',$this->tbkApi->coupon($input));
     }
-    //淘宝客淘口令
     /**
      * @SWG\Get(
      *     path="/tpwd_create",
@@ -937,13 +936,14 @@ class TbkController extends Controller
         }
         return ApiReturn::handle('SUCCESS',$this->tbkApi->optimusMaterial($input),$input['limit'],$input['page']);
     }
+
     /**
      * @SWG\Get(
-     *     path="/product/search",
+     *     path="/material_optional",
      *     summary="搜索产品",
      *     tags={"商品相关接口"},
      *     description="搜索产品",
-     *     operationId="account_index",
+     *     operationId="product_search_taobao",
      *     produces={"application/json"},
      *     @SWG\Parameter(
      *         name="imei",
@@ -1115,7 +1115,7 @@ class TbkController extends Controller
      *     ),
      *     @SWG\Response(
      *         response=200,
-     *         description="SUCCESS"
+     *         description="SUCCESS",
      *     ),
      *     @SWG\Response(
      *         response=422,
