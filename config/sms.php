@@ -21,9 +21,9 @@ return [
 //            'is_sub_account' => false,
 //        ],
         'aliyun' => [
-            'access_key_id' => 'LTAI8YZZPx7Ars8S',
-            'access_key_secret' => 'bA4IlZObJZSd6xgeDEJO0iocBEu7jT',
-            'sign_name' => '天天乐购',
+            'access_key_id' => 'LTAIB0aokppPwwxW',//'LTAI8YZZPx7Ars8S',
+            'access_key_secret' => 'ZKZCmKYXAKOxvM6xQbsKx2Ft1iEqT6',//'bA4IlZObJZSd6xgeDEJO0iocBEu7jT',
+            'sign_name' => '蜜传消息'//'天天乐购',
         ],
     ],
 ];

@@ -21,7 +21,7 @@ class SMSService
         $str = mt_rand(10000,99999);
         try{
             $result = $easySms->send($phone,[
-                'template' => 'SMS_169103731',
+                'template' => 'SMS_149417711',//'SMS_169103731',
                 'data' => ['code'=>$str] //[$str,5]
             ]);
         }catch (\Exception $exception){
