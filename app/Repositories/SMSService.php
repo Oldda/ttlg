@@ -18,7 +18,7 @@ class SMSService
         //发送
         $config = config('sms');
         $easySms = new EasySms($config);
-        $str = mt_rand(10000,99999);
+        $str = mt_rand(100000,999999);
         try{
             $result = $easySms->send($phone,[
                 'template' => 'SMS_149417711',//'SMS_169103731',
