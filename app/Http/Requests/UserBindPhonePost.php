@@ -25,7 +25,7 @@ class UserBindPhonePost extends FormRequest
     {
         return [
             'phone' => 'required|size:11|unique:user',
-            'verify_code' => 'required|size:5'
+            'verify_code' => 'required|size:6'
         ];
     }
 }
