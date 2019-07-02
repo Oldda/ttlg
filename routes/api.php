@@ -44,6 +44,8 @@ Route::group(['namespace'=>'ClientApi'],function (){
     Route::get('uatm_favorites_get','TbkController@uatmFavoritesGet');
     //淘抢购Api
     Route::get('ju_tqg_get','TbkController@juTqgGet');
+    //链接解析api
+    Route::get('click_extract','TbkController@clickExtract');
     //淘宝客商品猜你喜欢
     Route::get('item_guess_like','TbkController@itemGuessLike');
     //好券清单API【导购】

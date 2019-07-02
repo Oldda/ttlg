@@ -581,6 +581,17 @@ class TbkController extends Controller
     }
 
     /**
+     * 链接解析api
+     */
+    public function clickExtract()
+    {
+        $url = request('click_url','');
+        if (empty($url)){
+            return ApiReturn::handle('PARAMETER_LOST');
+        }
+        return $this->tbkApi->clickExtract($url);
+    }
+    /**
      * @SWG\Get(
      *     path="/item_guess_like",
      *     summary="淘宝客商品猜你喜欢",

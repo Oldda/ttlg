@@ -189,6 +189,11 @@ class ProductService
         $resp = $this->client->execute($req);
         return $resp->results->results??[];
     }
+    //链接解析api
+    public function clickExtract($url)
+    {
+        return '接口不开放!';
+    }
     //淘宝客商品猜你喜欢
     public function itemGuessLike($input)
     {
@@ -381,7 +386,7 @@ class ProductService
         return $data['data']??new \stdClass();
     }
 
-    private function curlGet($url)
+    public function curlGet($url)
     {
         $headerArray =array("Content-type:application/json;","Accept:application/json");
         $ch = curl_init();

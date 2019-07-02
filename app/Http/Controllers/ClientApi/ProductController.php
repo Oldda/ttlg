@@ -310,9 +310,9 @@ class ProductController extends Controller
      *     operationId="get_coupon_from_item",
      *     produces={"application/json"},
      *     @SWG\Parameter(
-     *         name="item_id",
+     *         name="paste",
      *         in="path",
-     *         description="商品id",
+     *         description="粘贴板里商品的内容，建议判断是否合法内容，不是所有粘贴板内容都请求服务器",
      *         required=true,
      *         type="string",
      *     ),
@@ -328,9 +328,26 @@ class ProductController extends Controller
      */
     public function getCouponFromItemId()
     {
-        $item_id = request('item_id',null);
-        if ($item_id == null){
-            return ApiReturn::handel('PARAMETER_LOST');
+        //解析粘贴板的内容
+        $str = request('paste','');
+        if ($str === ''){
+            return ApiReturn::handle('PARAMETER_LOST');
+        }
+        if (strpos($str,'https://') === false){
+            return ApiReturn::handle('PARAMETER_ERROR');
+        }
+        //获取短连接
+        $start = stripos($str,'https://');
+        $end = stripos($str,'点击链接');
+        $url = substr($str,$start,$end-$start);
+        //获取链接页面内容
+        $out = file_get_contents($url);
+        $startC = stripos($out,"&id=");
+        $endC = stripos($out,"&sourceType=");
+        //获取商品id
+        $item_id = substr($out,$startC + 4,$endC - $startC - 4);
+        if ((int)$item_id <= 1){
+            return ApiReturn::handle('PARAMETER_ERROR');
         }
         //获取商品信息
         $product = $this->productService->show(['item_id'=>$item_id]);
