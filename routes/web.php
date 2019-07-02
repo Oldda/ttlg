@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::get('navigation',function(){
 	return view('navigation');
 });
+Route::get('product_detail','ClientApi\TbkController@getDetail'); //h5页面商品详情
 Route::get('download',function(){
 	$imgs = (new DownloadImg())
 			->where('status',1)

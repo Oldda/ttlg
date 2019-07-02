@@ -65,7 +65,6 @@ Route::group(['namespace'=>'ClientApi'],function (){
      */
     Route::get('/product/search','ProductController@search');
     Route::get('/product/show','ProductController@show');
-    Route::get('product_detail','TbkController@getDetail'); //h5页面商品详情
     Route::get('get_coupon_from_item','ProductController@getCouponFromItemId');
     /**
      * 用户路由

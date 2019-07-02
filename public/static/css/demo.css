@@ -1,0 +1,270 @@
+html,
+body {
+  margin: 0px;
+  padding: 0px;
+  background: #fff;
+  box-sizing: border-box;
+}
+header {
+  height: 2.8125rem;
+  color: #d7082b;
+  font-size: 1.25rem;
+  line-height: 2.8125rem;
+  font-weight: bold;
+  text-indent: 0.9375rem;
+  box-shadow: 0px 0px 6px #a9a9a9;
+}
+header>span {
+  background: #d60226;
+  color: #fff;
+  padding: 0.25rem 0.3125rem;
+  border-radius: 0.1875rem;
+  margin-left: 0.09375rem;
+}
+.content {
+  width: 100%;
+  position: absolute;
+  top: 2.8125rem;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+}
+.content>.c-box {
+  padding: 1.25rem 1.5rem 0rem 1.5rem;
+  box-shadow: 0 0 10px 0 #d3d3d3;
+}
+.content>.c-box .c-header {
+  height: 2.1875rem;
+  padding: 0.9375rem 0rem 0.625rem 0.625rem;
+  border: 1px solid #d3d3d3;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 0 10px 0 #d3d3d3;
+  border-bottom: none;
+  display: flex;
+  align-items: center;
+  font-size: 0;
+}
+.content>.c-box .c-header img {
+  width: 2.1875rem;
+  height: 2.1875rem;
+}
+.content>.c-box .c-header span {
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 0.46875rem;
+}
+.content>.detail {
+  height: 2.96875rem;
+  line-height: 2.96875rem;
+  background: #fff;
+  text-align: center;
+  font-size: 16px;
+}
+.content>.detail .line {
+  display: inline-block;
+  width: 0.78125rem;
+  margin: 0 0.3125rem;
+  border-top: 1px solid #ccc;
+  vertical-align: 5px;
+}
+.content>.detail .text {
+  display: inline-block;
+  vertical-align: 0.15625rem;
+}
+.content>.header {
+  box-sizing: border-box;
+  padding: 1.875rem 0.9375rem 2.8125rem 0.9375rem;
+  background: #f94e23;
+}
+.content>.header>.h-content {
+  background: #fff;
+  padding: 0.625rem 0rem 2.1875rem 1.40625rem;
+  border-radius: 0.375rem;
+}
+.c-img {
+  width: 100%;
+  height: 19.3125rem;
+  background: url("../img/11.jpg") no-repeat center;
+  background-size: 100% 100%;
+  position: relative;
+}
+.c-img .i-content {
+  position: absolute;
+  /*top: 9.375rem;*/
+  border-radius: 0.625rem;
+  width: 100%;
+  height: 4.125rem;
+  background-image: url("../img/11.png");
+  background-size: 100% 100%;
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.c-img .i-content>.i-left {
+  width: 15rem;
+  height: 100%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+.c-img .i-content>.i-left>div {
+  border-right: 0.15625rem dashed #f00;
+  padding-right: 0.3125rem;
+  display: flex;
+  padding-left: 0.9375rem;
+  flex-direction: column;
+  justify-content: center;
+}
+.c-img .i-content>.i-left>div>span:nth-of-type(1) {
+  margin-bottom: 0.15625rem;
+}
+.c-img .i-content>.i-left>div .sss {
+  font-weight: bolder;
+  font-size: 1.34375rem;
+}
+.c-img .i-content>.i-right {
+  width: 6.75rem;
+  height: 2.03125rem;
+  border-radius: 1.5625rem;
+  color: #de143e;
+  line-height: 2.03125rem;
+  text-align: center;
+  background: #fff;
+  margin-right: 1.25rem;
+}
+.er {
+  height: 17.5rem;
+  background-image: url("../img/3.jpg");
+}
+.header >.h-content>.a {
+  width: 18.4375rem;
+  height: 2.40625rem;
+  font-size: 2.40625rem;
+  line-height: 2.40625rem;
+  margin-bottom: 2.1875rem;
+  color: #fec2c0;
+  text-align: center;
+  position: relative;
+}
+.header >.h-content>.a .detail {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  font-weight: bolder;
+  height: 1.1875rem;
+  line-height: 1.1875rem;
+  color: #f5302a;
+  background: transparent;
+  text-align: center;
+  font-size: 1.1875rem;
+}
+.header >.h-content>.a .detail .line {
+  display: inline-block;
+  width: 0.78125rem;
+  margin: 0 0.3125rem;
+  border-top: 1px solid #ccc;
+  vertical-align: 0.5625rem;
+}
+.header >.h-content>.a .detail .text {
+  display: inline-block;
+  vertical-align: 0.3125rem;
+}
+.header >.h-content>.text {
+  width: 18.4375rem;
+}
+.header >.h-content>.text>div:nth-of-type(1) {
+  font-weight: bolder;
+  font-size: 1rem;
+}
+.header >.h-content>.text>div:nth-of-type(2) {
+  font-size: 1rem;
+  line-height: 1.875rem;
+}
+.header >.h-content>.yi-img {
+  width: 18.4375rem;
+  height: 18.4375rem;
+  margin: 2.1875rem 0;
+  background-image: url("../img/4.png");
+  background-size: 100% 100%;
+}
+.header >.h-content>.er-img {
+  margin: 2.1875rem 0;
+  width: 100%;
+  height: 14.125rem;
+  background-image: url("../img/5.png");
+  background-size: 100% 100%;
+}
+.header >.h-content>.san-img {
+  margin-top: 2.1875rem;
+  width: 100%;
+  height: 18.28125rem;
+  background-image: url("../img/6.png");
+  background-size: 100% 100%;
+}
+.c-box .c-content {
+  box-sizing: border-box;
+}
+.c-box .c-content .top {
+  margin-bottom: 0.9375rem;
+}
+.c-box .c-content .top span:nth-of-type(1) {
+  background: #fee49f;
+  background: linear-gradient(to right #fee49f, #f3c135);
+  padding: 0.3125rem 0.3125rem;
+  box-sizing: border-box;
+  border-radius: 0.3125rem;
+  margin: 0.3125rem 0.625rem 0rem 0.46875rem;
+}
+.c-box .c-content .bottom span:nth-of-type(1) {
+  background: #fa8873;
+  background: linear-gradient(to right #fa8873, #fc576d);
+  color: #fff;
+  padding: 0.3125rem 0.3125rem;
+  box-sizing: border-box;
+  border-radius: 0.3125rem;
+  margin: 0.3125rem 0.625rem 0rem 0.46875rem;
+}
+.c-box .c-content .bottom span:nth-of-type(2) {
+  color: #fc526a;
+}
+.c-box .c-content .bottom span:nth-of-type(3) {
+  text-decoration: line-through;
+  font-size: 0.625rem;
+  color: #999;
+}
+.c-box .c-content .bottom span:nth-of-type(4) {
+  float: right;
+  margin-right: 0.6875rem;
+}
+.swiper-container {
+  width: 20.3125rem;
+  height: 13.59375rem;
+  font-size: 0;
+  border-left: 1px solid #d3d3d3;
+  border-right: 1px solid #d3d3d3;
+  padding: 0;
+}
+.swiper-container img {
+  width: 100%;
+  height: 100%;
+}
+.swiper-container-horizontal>.swiper-pagination-bullets,
+.swiper-pagination-custom,
+.swiper-pagination-fraction {
+  bottom: 0.3125rem;
+  z-index: 999;
+}
+.swiper-pagination-bullet-active {
+  background: #808080;
+}
+.swiper-pagination-bullet {
+  background: #d3d3d3;
+}
+.dddd {
+  padding: 0.625rem 0rem;
+  border: 1px solid #d3d3d3;
+  border-top: none;
+  border-radius: 0 0 0.375rem 0.375rem;
+}

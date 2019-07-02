@@ -1185,7 +1185,7 @@ class TbkController extends Controller
     public function getDetail()
     {
         //获取最新的apk包
-        $apk = $apk = (new Apk())->orderBy('create_time','desc')->first();
+        $apk = (new Apk())->orderBy('create_time','desc')->first();
         //获取商品信息
         $input = request()->all();
         if (!isset($input['item_id']) || !isset($input['activity_id']) || !isset($input['coupon_share_url'])){

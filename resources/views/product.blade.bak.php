@@ -1,57 +1,54 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <title>商品详情</title>
-        <link rel="stylesheet" href="{{asset('static/css/swiper.min.css')}}">
-        <link rel="stylesheet" href={{asset('static/css/demo.css')}}>
-        <script src={{asset('static/js/jquery-2.1.4.min.js')}}></script>
-        <script src={{asset('static/js/swiper.min.js')}}></script>
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>商品详情</title>
+    <link rel="stylesheet" href="http://localhost/ttlg/public/static/css/swiper.min.css">
+    <link rel="stylesheet" href={{public_path('static/css/demo.css')}}>
+    <script src={{public_path('static/js/jquery-2.1.4.min.js')}}></script>
+    <script src={{public_path('static/js/swiper.min.js')}}></script>
 </head>
+<body>
 <script>document.querySelector('html').style.fontSize = (document.body.clientWidth / 375 * 16 + 'px');
     window.addEventListener('resize', function () {
         window.location.reload();
     })
 </script>
 <header>
-        更多优惠请下载
-    <span class="shou" onclick="javascript:window.open('{{$apk->downloadurl}}')">天天乐购</span>
+    更多优惠请下载
+    <span class="shou">天天乐购</span>
 </header>
 <div class="content">
     <div class="c-box">
         <div class="box">
             <div class="c-header">
-                <img src="{{$product['seller']['shopIcon']}}" alt="">
-                <span>{{$product['base']->nick}}</span>
+                <img src="./static/img/天猫.png" alt="">
+                <span>情梳万缕旗舰店</span>
             </div>
             <div class="swiper-container">
-                    <div class="swiper-wrapper">
-                        @foreach($product['base']->small_images->string as $img)
-                            <div class="swiper-slide">
-                                <img src={{$img}} alt="">
-                            </div>
-                        @endforeach
-{{--                        <div class="swiper-slide">--}}
-{{--                            <img src="./img/1.jpg" alt="">--}}
-{{--                        </div>--}}
-{{--                        <div class="swiper-slide">--}}
-{{--                            <img src="./img/1.jpg" alt="">--}}
-{{--                        </div>--}}
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src={{public_path('static/img/1.jpg')}} alt=""></div>
+                    <div class="swiper-slide">
+                        <img src="./img/1.jpg" alt="">
                     </div>
-                    <div class="swiper-pagination"></div>
+                    <div class="swiper-slide">
+                        <img src="./img/1.jpg" alt="">
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
             </div>
             <div class="c-content dddd">
                 <div class="top">
-                    {{isset($product['base']->free_shipment)?"<span>包邮</span>":''}}
-                    <span>{{$product['base']->title}}</span>
+                    <span>包邮</span>
+                    <span>小ck情书包百搭款链条包蝴蝶结</span>
                 </div>
                 <div class="bottom">
                     <span>用券后</span>
-                    <span>￥{{$product['base']->zk_final_price - $coupon->coupon_amount}}</span>
-                    <span>现价￥{{$product['base']->zk_final_price}}</span>
-                    <span>已售{{$product['base']->volume}}件</span>
+                    <span>￥29</span>
+                    <span>现价￥119</span>
+                    <span>已售5.49万件</span>
                 </div>
             </div>
         </div>
@@ -61,32 +58,26 @@
         <span class="text">宝贝详情</span>
         <span class="line"></span>
     </div>
-    <div style="margin: 0px;padding: 0px;text-align: center;text-indent: 0px;">
-        @foreach($pics as $data)
-            @if(isset($data['params']['picUrl']))
-                <img src="{{$data['params']['picUrl']}}" alt="" style="margin: 0px;padding: 0px; width: 100%; height: 100%;">
-            @endif
-        @endforeach
-    </div>
-    <div class="c-img" style="background-image: none;height: 0px;width: 100%;">
-        <div class="i-content" style="position: fixed;bottom:0;z-index: 100000;">
+    <div class="c-img">
+        <div class="i-content">
             <div class="i-left">
                 <div>
                     <span>
-{{--                        券剩余{{$coupon->coupon_amount}}--}}
                         立省
-                        <span class="sss">{{$coupon->coupon_amount}}</span>
+                        <span class="sss">3</span>
                         元
                     </span>
                     <span>
-                        使用期限：{{$coupon->coupon_start_time}}~{{$coupon->coupon_end_time}}
+                        使用期限：6月21日~6月23日
                     </span>
                 </div>
             </div>
             <div class="i-right">
-                <span class="shou" onclick="javascript:window.location.href='{{(strpos($coupon->coupon_share_url,'https://') !== false) ? $coupon->coupon_share_url : 'https://'.$coupon->coupon_share_url}}'">领券购买</span>
+                <span class="shou">领券购买</span>
             </div>
         </div>
+    </div>
+    <div class="c-img er">
     </div>
     <div class="detail">
         <span class="line"></span>
@@ -144,3 +135,4 @@
     })
 </script>
 </html>
+
