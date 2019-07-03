@@ -342,10 +342,20 @@ class ProductController extends Controller
         $url = substr($str,$start,$end-$start);
         //获取链接页面内容
         $out = file_get_contents($url);
-        $startC = stripos($out,"&id=");
-        $endC = stripos($out,"&sourceType=");
-        //获取商品id
-        $item_id = substr($out,$startC + 4,$endC - $startC - 4);
+        //判断是天猫还是淘宝
+        if (strpos($out,'http://a.m.tmall.com') !== false){
+            $startC = stripos($out,"http://a.m.tmall.com");
+            $endC = stripos($out,".htm?");
+            $item_id = substr($out,$startC + 22,$endC - $startC - 22);
+        }elseif(strpos($out,"https://a.m.taobao.com") !== false){
+            $startC = stripos($out,"https://a.m.taobao.com");
+            $endC = stripos($out,".htm?");
+            $item_id = substr($out,$startC + 24,$endC - $startC - 24);
+        }else{
+            $startC = stripos($out,"&id=");
+            $endC = stripos($out,"&sourceType=");
+            $item_id = substr($out,$startC + 4,$endC - $startC - 4);
+        }
         if ((int)$item_id <= 1){
             return ApiReturn::handle('PARAMETER_ERROR');
         }
