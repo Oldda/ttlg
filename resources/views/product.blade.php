@@ -15,9 +15,10 @@
         window.location.reload();
     })
 </script>
-<header>
-        更多优惠请下载
-    <span class="shou" onclick="javascript:window.open('{{$apk->downloadurl}}')">天天乐购</span>
+<header style="text-indent: 0rem;">
+    <a href="{{$apk->downloadurl}}"><img src="{{asset('static/img/12.jpg')}}" alt="" style="width: 100%; height: 100%; margin-left: 0px;"></a>
+{{--        更多优惠请下载--}}
+{{--    <span class="shou" onclick="javascript:window.open('{{$apk->downloadurl}}')">天天乐购</span>--}}
 </header>
 <div class="content">
     <div class="c-box">
@@ -64,7 +65,7 @@
     <div style="margin: 0px;padding: 0px;text-align: center;text-indent: 0px;">
         @foreach($pics as $data)
             @if(isset($data['params']['picUrl']))
-                <img src="{{$data['params']['picUrl']}}" alt="" style="margin: 0px;padding: 0px; width: 100%; height: 100%;">
+                <img src="{{$data['params']['picUrl']}}" alt="" style="margin: 0px;padding: 0px; width: 100%; height: 100%;vertical-align:top; display:block;">
             @endif
         @endforeach
     </div>
@@ -78,7 +79,7 @@
                         <span class="sss">{{$coupon->coupon_amount}}</span>
                         元
                     </span>
-                    <span>
+                    <span style="font-size: 8px;">
                         使用期限：{{$coupon->coupon_start_time}}~{{$coupon->coupon_end_time}}
                     </span>
                 </div>
