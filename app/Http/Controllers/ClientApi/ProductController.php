@@ -361,8 +361,12 @@ class ProductController extends Controller
         }
         //获取商品信息
         $product = $this->productService->show(['item_id'=>$item_id]);
+        //截取字符串里的内容，返回给前端。多次一举
+        $startTitle = stripos($str,'【');
+        $endTitle = stripos($str,'】');
+        $title = substr($str,$startTitle+3,$endTitle - $startTitle - 3);
         if (get_object_vars($product) === []){
-            return ApiReturn::handle('NOT_FOUND_ERROR');
+            return ApiReturn::handle('SUCCESS',['title'=>$title,'coupon_info'=>new \stdClass()]);
         }
         //搜索物料
         $detail = $this->productService->search([
@@ -371,10 +375,10 @@ class ProductController extends Controller
         if ($detail != []){
             foreach ($detail as $value){
                 if ($value->item_id == $item_id){
-                    return ApiReturn::handle('SUCCESS',$value);
+                    return ApiReturn::handle('SUCCESS',['title'=>$title,'coupon_info'=>$value]);
                 }
             }
         }
-        return ApiReturn::handle('COUPON_MISSING');
+        return ApiReturn::handle('SUCCESS',['title'=>$title,'coupon_info'=>new \stdClass()]);
     }
 }
