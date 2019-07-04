@@ -15,4 +15,15 @@ class DownloadImg extends Model
     protected $guarded = [
         'create_time','update_time'
     ];
+
+    /**
+     * 访问器-七牛雲圖片
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getImgAttribute($value)
+    {
+        return 'http://img.wukehui.cn'.$value;
+    }
 }
