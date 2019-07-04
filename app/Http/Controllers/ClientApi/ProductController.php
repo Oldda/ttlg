@@ -290,14 +290,22 @@ class ProductController extends Controller
         }
         $data = $this->productService->getDetail($input['item_id']);
         $data['base'] = $this->productService->show($input);
-        event(new UserBrowseEvent(
-            request()->header('imei',''),
-            '详情页',
-            $data['base']->num_iid.'_'.$data['base']->title,
-            request()->url(),
-            request()->header('operating_system',''),
-            request()->header('phone_type','')
-        ));
+        //用券說明
+        $data['coupon_use_description'] = [
+            asset('static/img/h5_03.jpg'),
+            asset('static/img/h5_04.jpg'),
+            asset('static/img/h5_05.jpg'),
+        ];
+        if (get_object_vars($data['base']) !== []){
+            event(new UserBrowseEvent(
+                request()->header('imei',''),
+                '详情页',
+                $data['base']->num_iid.'_'.$data['base']->title,
+                request()->url(),
+                request()->header('operating_system',''),
+                request()->header('phone_type','')
+            ));
+        }
         return ApiReturn::handle('SUCCESS',$data);
     }
 
