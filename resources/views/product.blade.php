@@ -8,6 +8,11 @@
         <link rel="stylesheet" href={{asset('static/css/demo.css')}}>
         <script src={{asset('static/js/jquery-2.1.4.min.js')}}></script>
         <script src={{asset('static/js/swiper.min.js')}}></script>
+        <style>
+            *{
+                -webkit-overflow-scrolling: touch;
+            }
+        </style>   
     <title>Document</title>
 </head>
 <script>document.querySelector('html').style.fontSize = (document.body.clientWidth / 375 * 16 + 'px');
@@ -15,8 +20,8 @@
         window.location.reload();
     })
 </script>
-<header style="text-indent: 0rem;">
-    <a href="{{$apk->downloadurl}}"><img src="{{asset('static/img/12.jpg')}}" alt="" style="width: 100%; height: 100%; margin-left: 0px;"></a>
+<header style="text-indent: 0rem;height:0px;">
+    <a href="{{$apk->downloadurl}}" style="display:block;height:36.44px;"><img src="{{asset('static/img/12.jpg')}}" alt="" style="width: 100%; height: auto; margin-left: 0px;"></a>
 {{--        更多优惠请下载--}}
 {{--    <span class="shou" onclick="javascript:window.open('{{$apk->downloadurl}}')">天天乐购</span>--}}
 </header>
@@ -46,7 +51,7 @@
             <div class="c-content dddd">
                 <div class="top">
                     {{isset($product['base']->free_shipment)?"<span>包邮</span>":''}}
-                    <span style="background:none;font-size:15px;">{{$product['base']->title}}</span>
+                    <span style="background:none;font-size:15px;margin:0px;display:inline-block;padding:5px 7px 0px 13px;">{{$product['base']->title}}</span>
                 </div>
                 <div class="bottom">
                     <span style="font-size:12px;">用券后</span>
