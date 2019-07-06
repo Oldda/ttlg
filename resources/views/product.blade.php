@@ -46,7 +46,7 @@
             <div class="c-content dddd">
                 <div class="top">
                     {{isset($product['base']->free_shipment)?"<span>包邮</span>":''}}
-                    <span>{{$product['base']->title}}</span>
+                    <span style="background:none;">{{$product['base']->title}}</span>
                 </div>
                 <div class="bottom">
                     <span>用券后</span>
