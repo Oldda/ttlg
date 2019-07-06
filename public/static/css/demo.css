@@ -210,7 +210,6 @@ header>span {
   margin-bottom: 0.9375rem;
 }
 .c-box .c-content .top span:nth-of-type(1) {
-  background: #fee49f;
   background: linear-gradient(to right #fee49f, #f3c135);
   padding: 0.3125rem 0.3125rem;
   box-sizing: border-box;
