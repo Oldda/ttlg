@@ -25,7 +25,7 @@
         <div class="box">
             <div class="c-header">
                 <img src="{{$product['seller']['shopIcon']}}" alt="">
-                <span>{{$product['base']->nick}}</span>
+                <span style="font-size:14px;font-wight:normal;">{{$product['base']->nick}}</span>
             </div>
             <div class="swiper-container">
                     <div class="swiper-wrapper">
@@ -46,20 +46,20 @@
             <div class="c-content dddd">
                 <div class="top">
                     {{isset($product['base']->free_shipment)?"<span>包邮</span>":''}}
-                    <span style="background:none;">{{$product['base']->title}}</span>
+                    <span style="background:none;font-size:15px;">{{$product['base']->title}}</span>
                 </div>
                 <div class="bottom">
-                    <span>用券后</span>
-                    <span>￥{{$product['base']->zk_final_price - $coupon->coupon_amount}}</span>
-                    <span>现价￥{{$product['base']->zk_final_price}}</span>
-                    <span>已售{{$product['base']->volume}}件</span>
+                    <span style="font-size:12px;">用券后</span>
+                    <span style="margin-left:-10px;font-size:18px;">￥{{$product['base']->zk_final_price - $coupon->coupon_amount}}</span>
+                    <span style="margin-left:7px;">现价￥{{$product['base']->zk_final_price}}</span>
+                    <span style="font-size:13px;color:#999;">已售{{$product['base']->volume < 10000 ? $product['base']->volume : $product['base']->volume / 10000 . '万'}}件</span>
                 </div>
             </div>
         </div>
     </div>
     <div class="detail">
         <span class="line"></span>
-        <span class="text">宝贝详情</span>
+        <span class="text" style="font-size:14px;">宝贝详情</span>
         <span class="line"></span>
     </div>
     <div style="margin: 0px;padding: 0px;text-align: center;text-indent: 0px;">
