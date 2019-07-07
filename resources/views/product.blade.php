@@ -53,11 +53,11 @@
                     {{isset($product['base']->free_shipment)?"<span>包邮</span>":''}}
                     <span style="background:none;font-size:15px;margin:0px;display:inline-block;padding:5px 7px 0px 13px;">{{$product['base']->title}}</span>
                 </div>
-                <div class="bottom">
-                    <span style="font-size:12px;">用券后</span>
+                <div class="bottom" style="line-height:25px;">
+                    <span style="font-size:12px;position:relative;top:-2px;margin-left:0.7875rem;">用券后</span>
                     <span style="margin-left:-10px;font-size:18px;">￥{{$product['base']->zk_final_price - $coupon->coupon_amount}}</span>
-                    <span style="margin-left:7px;">现价￥{{$product['base']->zk_final_price}}</span>
-                    <span style="font-size:13px;color:#999;">已售{{$product['base']->volume < 10000 ? $product['base']->volume : $product['base']->volume / 10000 . '万'}}件</span>
+                    <span style="margin-left:7px;position:relative;top:-1.7px;">现价￥{{$product['base']->zk_final_price}}</span>
+                    <span style="font-size:13px;color:#999;">已售{{$product['base']->volume < 10000 ? $product['base']->volume : round($product['base']->volume / 10000, 2) . '万'}}件</span>
                 </div>
             </div>
         </div>
