@@ -177,8 +177,7 @@ class IndexController extends Controller
             'material_id' => 3756
         ];
         $data = array();
-        //$data['cat'] = $this->catService->list(); //获取分类列表
-        $data['hot_recommend'] = $this->channelService->list('index',3);//获取热门推荐
+        $data['cat'] = $this->catService->list(1); //获取热门推荐
         $data['banner'] = $this->bannerService->list('index'); //获取轮播图列表
         $data['king_kong'] = $this->channelService->list('index',2);//获取金刚展示位列表
         $data['channel'] = $this->channelService->list('index',1);//获取频道主题列表
