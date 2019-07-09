@@ -8,6 +8,7 @@ use App\Models\Apk;
 use App\Repositories\TbkServices\ProductService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redis;
 
 class TbkController extends Controller
 {
@@ -1191,21 +1192,33 @@ class TbkController extends Controller
         if (!isset($input['item_id']) || !isset($input['activity_id']) || !isset($input['coupon_share_url'])){
             return ApiReturn::handle('PARAMETER_LOST');
         }
-        $product = $this->tbkApi->getDetail($input['item_id']);
-        $product['base'] = $this->tbkApi->show($input);
-        //获取券信息
-        $coupon = $this->tbkApi->coupon($input);
-        if (!get_object_vars($coupon)){
-            return ApiReturn::handle('COUPON_GET_ERROR');
+        $data = Redis::get($input['item_id']);
+        if (null === $data){
+            $product = $this->tbkApi->getDetail($input['item_id']);
+            $product['base'] = $this->tbkApi->show($input);
+            //获取券信息
+            $coupon = $this->tbkApi->coupon($input);
+            if (!get_object_vars($coupon)){
+                return ApiReturn::handle('COUPON_GET_ERROR');
+            }
+            $coupon->coupon_share_url = $input['coupon_share_url'];
+            try{
+                $pics = json_decode(file_get_contents($product['item']['moduleDescUrl']),true)['data']['children'];
+            }catch (\Exception $exception){
+                $pics = [];
+            }
+            $data = json_encode(compact('pics','apk','product','coupon'));
+            Redis::set($input['item_id'],$data);
         }
-        $coupon->coupon_share_url = $input['coupon_share_url'];
-        try{
-            $pics = json_decode(file_get_contents($product['item']['moduleDescUrl']),true)['data']['children'];
-        }catch (\Exception $exception){
-            $pics = [];
-        }
-
-        return view('product',compact('pics','apk','product','coupon'));
+        event(new UserBrowseEvent(
+            request()->header('imei',''),
+            'H5详情页',
+            $input['item_id'],
+            request()->url(),
+            request()->header('operating_system',''),
+            request()->header('phone_type','')
+        ));
+        return view('product',json_decode($data,true));
         return ApiReturn::handle('SUCCESS',compact('apk','product','coupon'));
     }
 }

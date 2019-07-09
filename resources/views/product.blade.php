@@ -21,7 +21,7 @@
     })
 </script>
 <header style="text-indent: 0rem;height:0px;">
-    <a href="{{$apk->downloadurl}}" style="display:block;height:36.44px;"><img src="{{asset('static/img/12.jpg')}}" alt="" style="width: 100%; height: auto; margin-left: 0px;"></a>
+    <a href="{{$apk['downloadurl']}}" style="display:block;height:36.44px;"><img src="{{asset('static/img/12.jpg')}}" alt="" style="width: 100%; height: auto; margin-left: 0px;"></a>
 {{--        更多优惠请下载--}}
 {{--    <span class="shou" onclick="javascript:window.open('{{$apk->downloadurl}}')">天天乐购</span>--}}
 </header>
@@ -30,11 +30,11 @@
         <div class="box">
             <div class="c-header">
                 <img src="{{$product['seller']['shopIcon']}}" alt="">
-                <span style="font-size:14px;font-weight:normal;">{{$product['base']->nick}}</span>
+                <span style="font-size:14px;font-weight:normal;">{{$product['base']['nick']}}</span>
             </div>
             <div class="swiper-container">
                     <div class="swiper-wrapper">
-                        @foreach($product['base']->small_images->string as $img)
+                        @foreach($product['base']['small_images']['string'] as $img)
                             <div class="swiper-slide">
                                 <img src={{$img}} alt="">
                             </div>
@@ -50,14 +50,14 @@
             </div>
             <div class="c-content dddd">
                 <div class="top">
-                    {{isset($product['base']->free_shipment)?"<span>包邮</span>":''}}
-                    <span style="background:none;font-size:15px;margin:0px;display:inline-block;padding:5px 7px 0px 13px;">{{$product['base']->title}}</span>
+                    {{isset($product['base']['free_shipment'])?"<span>包邮</span>":''}}
+                    <span style="background:none;font-size:15px;margin:0px;display:inline-block;padding:5px 7px 0px 13px;">{{$product['base']['title']}}</span>
                 </div>
                 <div class="bottom" style="line-height:25px;">
                     <span style="font-size:12px;position:relative;top:-2px;margin-left:0.7875rem;">用券后</span>
-                    <span style="margin-left:-10px;font-size:18px;">￥{{$product['base']->zk_final_price - $coupon->coupon_amount}}</span>
-                    <span style="margin-left:7px;position:relative;top:-1.7px;">现价￥{{$product['base']->zk_final_price}}</span>
-                    <span style="font-size:13px;color:#999;">已售{{$product['base']->volume < 10000 ? $product['base']->volume : round($product['base']->volume / 10000, 2) . '万'}}件</span>
+                    <span style="margin-left:-10px;font-size:18px;">￥{{$product['base']['zk_final_price'] - $coupon['coupon_amount']}}</span>
+                    <span style="margin-left:7px;position:relative;top:-1.7px;">现价￥{{$product['base']['zk_final_price']}}</span>
+                    <span style="font-size:13px;color:#999;">已售{{$product['base']['volume'] < 10000 ? $product['base']['volume'] : round($product['base']['volume'] / 10000, 2) . '万'}}件</span>
                 </div>
             </div>
         </div>
@@ -81,16 +81,16 @@
                     <span>
 {{--                        券剩余{{$coupon->coupon_amount}}--}}
                         立省
-                        <span class="sss">{{$coupon->coupon_amount}}</span>
+                        <span class="sss">{{$coupon['coupon_amount']}}</span>
                         元
                     </span>
                     <span style="font-size: 8px;">
-                        使用期限：{{$coupon->coupon_start_time}}~{{$coupon->coupon_end_time}}
+                        使用期限：{{$coupon['coupon_start_time']}}~{{$coupon['coupon_end_time']}}
                     </span>
                 </div>
             </div>
             <div class="i-right">
-                <span class="shou" onclick="javascript:window.location.href='{{(strpos($coupon->coupon_share_url,'https://') !== false) ? $coupon->coupon_share_url : 'https://'.$coupon->coupon_share_url}}'">领券购买</span>
+                <span class="shou" onclick="javascript:window.location.href='{{(strpos($coupon['coupon_share_url'],'https://') !== false) ? $coupon['coupon_share_url'] : 'https://'.$coupon['coupon_share_url']}}'">领券购买</span>
             </div>
         </div>
     </div>
