@@ -1211,7 +1211,7 @@ class TbkController extends Controller
             Redis::set($input['item_id'],$data);
         }
         event(new UserBrowseEvent(
-            request()->header('imei',''),
+            request()->header('imei',request()->ip()),
             'H5详情页',
             $input['item_id'],
             request()->url(),
