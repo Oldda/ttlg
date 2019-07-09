@@ -22,7 +22,7 @@ class Category extends Model
 
     public function allChildrenCategorys()
     {
-        return $this->childCategory()->with('allChildrenCategorys');
+        return $this->childCategory()->where('status',1)->with('allChildrenCategorys');
     }
 
     /**
