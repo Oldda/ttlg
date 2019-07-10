@@ -1214,7 +1214,7 @@ class TbkController extends Controller
         event(new UserBrowseEvent(
             request()->header('imei',request()->ip()),
             'H5详情页',
-            $input['item_id'],
+            $input['item_id'].'_'.json_decode($data,true)['product']['base']['title'],
             request()->url(),
             request()->header('operating_system',''),
             request()->header('phone_type','')
