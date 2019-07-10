@@ -1203,7 +1203,7 @@ class TbkController extends Controller
             }
             $coupon->coupon_share_url = $input['coupon_share_url'];
             try{
-                $pics = json_decode(file_get_contents($product['item']['moduleDescUrl']),true)['data']['children'];
+                $pics = json_decode($this->tbkApi->curlGet($product['item']['moduleDescUrl']),true)['data']['children'];
             }catch (\Exception $exception){
                 $pics = [];
             }
