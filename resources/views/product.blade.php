@@ -29,7 +29,7 @@
     <div class="c-box">
         <div class="box">
             <div class="c-header">
-                <img src="{{$product['seller']['shopIcon']}}" alt="">
+                <img src="{{$product['seller']['shopIcon']??''}}" alt="">
                 <span style="font-size:14px;font-weight:normal;">{{$product['base']['nick']}}</span>
             </div>
             <div class="swiper-container">
