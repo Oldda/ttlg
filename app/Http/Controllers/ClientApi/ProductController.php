@@ -148,6 +148,13 @@ class ProductController extends Controller
      *         type="string",
      *     ),
      *     @SWG\Parameter(
+     *         name="material_id",
+     *         in="path",
+     *         description="官方的物料Id(详细物料id见：https://tbk.bbs.taobao.com/detail.html?appId=45301&postId=8576096)，不传时默认为2836",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
      *         name="has_coupon",
      *         in="path",
      *         description="优惠券筛选-是否有优惠券。true表示该商品有优惠券，false或不设置表示不限",
