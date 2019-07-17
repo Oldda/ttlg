@@ -389,6 +389,7 @@ class ProductService
                     return [];
                 }
             }
+            dd($data);
             $data = $data['data'];
             Redis::set('android_'.$item_id,json_encode($data));
         }else{
