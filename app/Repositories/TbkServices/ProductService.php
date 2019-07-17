@@ -2,6 +2,7 @@
 namespace App\Repositories\TbkServices;
 
 use App\Facades\ApiReturn;
+use Illuminate\Support\Facades\Redis;
 
 class ProductService
 {
@@ -378,12 +379,22 @@ class ProductService
     //补充接口淘宝产品详情
     public function getDetail($item_id)
     {
-        $url = "http://h5api.m.taobao.com/h5/mtop.taobao.detail.getdetail/6.0/?data=%7B%22itemNumId%22%3A%22".$item_id."%22%7D";
-        $data = $this->curlGet($url);
-        if (empty($data) || is_null($data)){
-            return new \stdClass();
+        $data = Redis::get('android_'.$item_id);
+        if (null === $data){
+            $url = "http://h5api.m.taobao.com/h5/mtop.taobao.detail.getdetail/6.0/?data=%7B%22itemNumId%22%3A%22".$item_id."%22%7D";
+            $data = $this->curlGet($url);
+            if (empty($data) || is_null($data)){
+                $data = $this->curlGet($url);
+                if (empty($data) || is_null($data)){
+                    return new \stdClass();
+                }
+            }
+            $data = $data['data'];
+            Redis::set('android_'.$item_id,json_encode($data));
+        }else{
+            $data = json_decode($data,true);
         }
-        return $data['data']??new \stdClass();
+        return $data??new \stdClass();
     }
 
     public function curlGet($url)
