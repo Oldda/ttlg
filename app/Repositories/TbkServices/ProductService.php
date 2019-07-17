@@ -383,9 +383,9 @@ class ProductService
         if (null === $data){
             $url = "http://h5api.m.taobao.com/h5/mtop.taobao.detail.getdetail/6.0/?data=%7B%22itemNumId%22%3A%22".$item_id."%22%7D";
             $data = $this->curlGet($url);
-            if (empty($data) || is_null($data)){
+            if ($data === []){
                 $data = $this->curlGet($url);
-                if (empty($data) || is_null($data)){
+                if ($data === []){
                     return new \stdClass();
                 }
             }
