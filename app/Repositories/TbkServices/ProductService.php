@@ -363,6 +363,7 @@ class ProductService
         }
         $req->setAdzoneId(config('tbk.adzone_id'));
         $resp = $this->client->execute($req);
+        dd($resp);
         return $resp->result_list->map_data??[];
     }
 

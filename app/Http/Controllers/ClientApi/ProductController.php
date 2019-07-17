@@ -216,6 +216,9 @@ class ProductController extends Controller
     public function search()
     {
         $input = request()->all();
+        if (!isset($input['cat'])){
+            $input['cat'] = '16,30,50008165,1801,21,50002766,50006843,50010788,50011740,35';
+        }
         $input['limit'] = request('limit',$this->limit);
         $input['page'] = request('page',$this->page);
         $data = $this->productService->search($input);
