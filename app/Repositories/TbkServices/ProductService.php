@@ -386,7 +386,7 @@ class ProductService
             if ($data === []){
                 $data = $this->curlGet($url);
                 if ($data === []){
-                    return new \stdClass();
+                    return [];
                 }
             }
             $data = $data['data'];
