@@ -79,7 +79,7 @@ var _hmt = _hmt || [];
 </script>
 <head>
     <meta charset="utf-8">
-    <title>省钱大作战-618</title>
+    <title>淘宝优惠券，天天双十一</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta name="author" content="youku.com">
     <meta name="apple-mobile-web-app-capable" content="yes">
