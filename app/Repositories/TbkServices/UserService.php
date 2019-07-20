@@ -45,6 +45,7 @@ class UserService extends SMSService
                 return false;
                 break;
         }
+        $user->phone_is_bind = true;
         //是否绑定了手机号
         if (!isset($user->phone) || $user->phone === null){
             $user->phone_is_bind = false;
