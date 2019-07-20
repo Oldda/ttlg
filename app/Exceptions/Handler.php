@@ -71,8 +71,8 @@ class Handler extends ExceptionHandler
             'status'=>false,
             'response_code' => 302,
             'response_time'=> date('Y-m-d H:i:s'),
-            'msg' => $exception->getMessage(),
-            'errors' => $exception->errors(),
+            'msg' => '参数错误',//$exception->getMessage(),
+            'errors' => array_shift($exception->errors()),
         ], 302); //$exception->status
     }
 }
