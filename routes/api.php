@@ -71,6 +71,7 @@ Route::group(['namespace'=>'ClientApi'],function (){
      */
     Route::resource('/user','UserController');
     Route::post('/login','UserController@login');
+    Route::get('logout','UserController@logout');//登出
 
     /**
      * 分类路由
@@ -84,7 +85,6 @@ Route::group(['namespace'=>'ClientApi'],function (){
 //登录中间件路由
 Route::group(['namespace'=>'ClientApi','middleware'=>'login'],function (){
     Route::post('feedback','FeedbackController@store');//添加反馈
-    Route::get('logout','UserController@logout');//登出
     Route::post('user/bind_phone','UserController@bindPhone');//用户绑定手机号
     Route::get('sms','IndexController@sms'); //发送短信
 });

@@ -48,6 +48,7 @@ class UserController extends Controller
      */
     public function logout()
     {
+        return ApiReturn::handle('SUCCESS');
         $del = (new LoginLog())->where('user_id',$this->user_id)->delete();
         if (!$del){
             return ApiReturn::handle('DELETE_SOURCE_ERROR');
