@@ -28,4 +28,15 @@ class UserBindPhonePost extends FormRequest
             'verify_code' => 'required|size:6'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'phone.required' => '手机号不能为空！',
+            'phone.size' => '手机号格式不正确！',
+            'phone.unique' => '手机号已被占用！',
+            'verify_code.required' => '验证码不能为空！',
+            'verify_size' => '验证码错误！'
+        ];
+    }
 }
