@@ -47,9 +47,9 @@ class UserService extends SMSService
         }
         $user->phone_is_bind = true;
         //是否绑定了手机号
-        if (!isset($user->phone) || $user->phone === null){
-            $user->phone_is_bind = false;
-        }
+//        if (!isset($user->phone) || $user->phone === null){
+//            $user->phone_is_bind = false; //暂时取消绑定手机判定
+//        }
         //初始化登录token
         $user->login_token = $this->generateToken($request,$user->id);
         //返回user
