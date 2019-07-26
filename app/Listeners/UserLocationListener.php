@@ -34,11 +34,14 @@ class UserLocationListener implements ShouldQueue
 //            $location = $this->getPosition($ip);
 //        }
         $location = $this->getPosition($ip);
-        if ($location){
-            $user = (new User())->find($user_id);
-            $user->location = $location;
-            $user->save();
-        }
+//        if ($location){
+//            $user = (new User())->find($user_id);
+//            $user->location = $location;
+//            $user->save();
+//        }
+        $user = (new User())->find($user_id);
+        $user->location = '北京';
+        $user->save();
     }
 
     //根据ip获取方位
