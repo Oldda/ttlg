@@ -43,12 +43,12 @@ class UserLocationListener implements ShouldQueue
     //根据ip获取方位
     private function getPosition($ip)
     {
-        $url="http://ip.taobao.com/service/getIpInfo.php?ip=".$ip;
+        $url="http://api.map.baidu.com/location/ip?ak=7IMM5SGRsCfTPg6MQ8h1lgatiQxEVr6M&ip=".$ip;  // 百度地图地址
         $ipinfo=json_decode(file_get_contents($url));
-        if($ipinfo->code=='1'){
+        if($ipinfo->status!='0'){
             return false;
         }
-        $city = $ipinfo->data->region.$ipinfo->data->city;
+        $city = $ipinfo->content->address_detail->province.$ipinfo->content->address_detail->city;
         return $city;
     }
 }
