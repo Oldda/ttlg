@@ -42,7 +42,7 @@ class UserLocationListener implements ShouldQueue
     }
 
     //根据ip获取方位
-    private function getPosition($ip)
+    public function getPosition($ip)
     {
         $url="http://api.map.baidu.com/location/ip?ak=7IMM5SGRsCfTPg6MQ8h1lgatiQxEVr6M&ip=".$ip;  // 百度地图地址
         $ipinfo=json_decode(file_get_contents($url));
