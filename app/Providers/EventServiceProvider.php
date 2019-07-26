@@ -20,7 +20,7 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\UserBrowseListener',
         ],
         'App\Events\UserLocationEvent' => [
-            'App\Listeners\UserLocationListener'
+            'App\Listeners\UserLocationListener',
         ]
     ];
 

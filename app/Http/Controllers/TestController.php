@@ -24,9 +24,6 @@ class TestController extends Controller
     //logstash配置
     public function test()
     {
-       $user = (new User())->find(4);
-       $user->location = '北京';
-       $user->save();
-       dd($user);
+       event(new UserLocationEvent(111,'49.4.215.193'));
     }
 }
