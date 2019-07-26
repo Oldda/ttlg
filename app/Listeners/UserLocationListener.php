@@ -29,6 +29,7 @@ class UserLocationListener implements ShouldQueue
     {
         $user_id = $event->user_id;
         $ip = $event->ip;
+        $ip = '49.4.215.193';
         $location = '本地';
         if ($ip != '127.0.0.1'){
             $location = $this->getPosition($ip);
