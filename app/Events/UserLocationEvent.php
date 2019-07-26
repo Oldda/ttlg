@@ -30,6 +30,6 @@ class UserLocationEvent
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('location');
+        return new PrivateChannel('channel-name');
     }
 }
