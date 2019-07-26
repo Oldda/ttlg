@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories\TbkServices;
 
+use App\Events\UserLocationEvent;
 use App\Facades\ApiReturn;
 use App\Models\LoginInfo;
 use App\Models\LoginLog;
@@ -26,7 +27,8 @@ class UserService extends SMSService
 					$union = $request->union_auth_token??'';
                     $user = $this->store([
                         'nickname' => $request->nickname,
-                        'thumbnail'=> $request->thumbnail
+                        'thumbnail'=> $request->thumbnail,
+                        'last_ip' => $this->getIp(),
                     ],[
                         'auth_platform' => $request->auth_platform,
                         'auth_token' => $request->auth_token,
@@ -66,6 +68,9 @@ class UserService extends SMSService
             $loginInfo['user_id'] = $user->id;
             LoginInfo::create($loginInfo);
             DB::commit();
+            if ($user){
+                event(new UserLocationEvent($user->id,$user->last_ip));
+            }
             return $user;
         }catch (\Exception $exception){
             DB::rollBack();
@@ -102,5 +107,28 @@ class UserService extends SMSService
         $user->phone = $request->phone;
         $user->save();
         return ApiReturn::handle('SUCCESS',$user);
+    }
+
+    //获取ip-赵林正提供
+    public function getIp()
+    {
+        static $ip = NULL;
+        if ($ip !== NULL)
+            return $ip;
+        if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $arr = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+            $pos = array_search('unknown', $arr);
+            if (false !== $pos)
+                unset($arr[$pos]);
+            $ip = trim($arr[0]);
+        }
+        else if (isset($_SERVER['HTTP_CLIENT_IP'])) {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } else if (isset($_SERVER['REMOTE_ADDR'])) {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+        //IP地址合法验证
+        $ip = (false !== ip2long($ip)) ? $ip : '0.0.0.0';
+        return $ip;
     }
 }

@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Events\UserBrowseEvent;
+use App\Repositories\TbkServices\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
 class TestController extends Controller
 {
     //测试
-    public function test()
+    public function test1()
     {
         //获取请求url
         $url = \request()->url();
@@ -19,22 +20,10 @@ class TestController extends Controller
     }
 
     //logstash配置
-    public function logstash()
+    public function test()
     {
-        input{
-            http{port=>7474}
-        }
-        filter{
-            mutate{add_field=>{"[@metadata][debug]"=>true}}
-            mutate{add_field=>{"message_show"=>"show in output"}}
-            mutate{remove_field=>{"headers"}}
-        }
-        output{
-            if[@metadata][debug]{
-                stdout{codec=>rubydebug{metadata=>true}}
-            }else{
-                stdout{codec=>dots}
-            }
-        }
+        $ip = (new UserService())->getIp();
+        $position = (new UserService())->getPosition($ip);
+        dd($position);
     }
 }
