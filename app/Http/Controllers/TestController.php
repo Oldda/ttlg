@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Events\UserBrowseEvent;
+use App\Events\UserLocationEvent;
+use App\Models\User;
 use App\Repositories\TbkServices\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
@@ -22,8 +24,9 @@ class TestController extends Controller
     //logstash配置
     public function test()
     {
-        $ip = (new UserService())->getIp();
-        $position = (new UserService())->getPosition($ip);
-        dd($position);
+       $user = (new User())->find(4);
+       $user->location = '北京';
+       $user->save();
+       dd($user);
     }
 }

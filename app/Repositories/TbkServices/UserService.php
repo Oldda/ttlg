@@ -68,9 +68,7 @@ class UserService extends SMSService
             $loginInfo['user_id'] = $user->id;
             LoginInfo::create($loginInfo);
             DB::commit();
-            if ($user){
-                event(new UserLocationEvent($user->id,$user->last_ip));
-            }
+            event(new UserLocationEvent($user->id,$user->last_ip));
             return $user;
         }catch (\Exception $exception){
             DB::rollBack();
