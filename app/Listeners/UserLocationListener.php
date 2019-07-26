@@ -30,10 +30,10 @@ class UserLocationListener implements ShouldQueue
         $user_id = $event->user_id;
         $ip = $event->ip;
         $location = '本地';
-        if ($ip !== '127.0.0.1'){
+        if ($ip != '127.0.0.1'){
             $location = $this->getPosition($ip);
         }
-        if ($location && !empty($location)){
+        if ($location){
             $user = (new User())->find($user_id);
             $user->location = $location;
             $user->save();
