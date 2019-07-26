@@ -15,7 +15,7 @@ class UserLocationEvent
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $user_id;
-    public $ip = '';
+    public $ip;
 
     public function __construct($user_id,$ip)
     {

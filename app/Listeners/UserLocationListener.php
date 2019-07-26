@@ -35,6 +35,7 @@ class UserLocationListener implements ShouldQueue
         }
         $user = (new User())->find($user_id);
         $user->location = $location;
+        $user->last_ip = $ip;
         $user->save();
     }
 
